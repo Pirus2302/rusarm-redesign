@@ -6,96 +6,23 @@
 <title>Русармкомплект – прототипы главной</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy-800:#123A6B;--navy-600:#1C4E8F;--accent:#C2500B;--ink:#16222E;--ink-mid:#4A5768;--line:#DCE3EC;--paper-2:#F6F8FB;--r:4px}
+:root{--navy-800:#123A6B;--navy-600:#1C4E8F;--accent:#C2500B;--ink:#16222E;--line:#DCE3EC;--r:4px}
 *{box-sizing:border-box}
-body{margin:0;background:#fff;color:var(--ink);font:400 17px/1.6 'Onest',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(16px,4vw,40px)}
-h1{font-size:clamp(28px,4vw,42px);letter-spacing:-.02em;line-height:1.1;margin:0}
-h2{font-size:22px;letter-spacing:-.01em;margin:0 0 16px}
-p{margin:0}
-a{color:inherit}
-.lede{color:var(--ink-mid);margin-top:16px;max-width:64ch}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-.tag{display:inline-block;align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid currentColor;border-radius:999px;padding:3px 10px}
-.card{border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s}
-.card:hover{border-color:var(--navy-600);transform:translateY(-2px);box-shadow:0 14px 34px rgba(18,58,107,.08)}
-.card b{font-size:20px;font-weight:600;letter-spacing:-.01em}
-.card p{color:var(--ink-mid);font-size:15px}
-.card ul{margin:6px 0 0;padding-left:18px;color:var(--ink-mid);font-size:15px;display:grid;gap:5px}
-.go{margin-top:auto;padding-top:16px;color:var(--accent);font-weight:600;font-size:15px}
-.block{margin-top:56px;padding-top:28px;border-top:2px solid var(--navy-800)}
-.q{display:grid;gap:14px;margin-top:8px}
-.q div{padding:16px 18px;background:var(--paper-2);border-radius:var(--r);font-size:16px}
-.q b{font-weight:600}
-.q span{display:block;color:var(--ink-mid);font-size:15px;margin-top:4px}
-@media(max-width:1000px){.cards{grid-template-columns:1fr 1fr}}
-@media(max-width:700px){.cards{grid-template-columns:1fr}}
+body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#fff;color:var(--ink);font:400 17px/1.6 'Onest',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+ul{list-style:none;margin:0;padding:clamp(24px,6vw,48px);display:grid;gap:12px;width:min(520px,100%)}
+a{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none;font-weight:600;letter-spacing:-.01em;transition:border-color .25s,transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1)}
+a em{font-style:normal;color:var(--accent)}
+a:hover{border-color:var(--navy-600);transform:translateY(-2px);box-shadow:0 14px 34px rgba(18,58,107,.08)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Русармкомплект, прототипы главной страницы</h1>
-  <p class="lede">Три варианта одной и той же структуры. Отличаются первым экраном, подачей блоков и количеством движения, наполнение одинаковое. Тексты взяты из брифа заказчика и не утверждены, фотографии подобраны временно.</p>
-  <p class="lede" style="margin-top:10px">Анимация работает при прокрутке: блоки проявляются, цифры набираются, фотографии оживают при наведении. Если в системе включён режим уменьшенного движения, всё показывается статично.</p>
-
-  <div class="cards">
-    <a class="card" href="v1.html">
-      <span class="tag">Движения меньше всего</span>
-      <b>Вариант 1. Инженерный</b>
-      <p>Светлый первый экран, текст и фотография рядом, синяя плашка с цифрами под фото.</p>
-      <ul>
-        <li>Продукция плиткой разного размера</li>
-        <li>Производители карточками 2 плюс 3</li>
-        <li>Этапы работы горизонтальной лентой</li>
-        <li>Заголовок собирается по словам, фото открывается сверху вниз</li>
-      </ul>
-      <span class="go">Открыть вариант 1 →</span>
-    </a>
-    <a class="card" href="v2.html">
-      <span class="tag">Движения средне</span>
-      <b>Вариант 2. Проектный</b>
-      <p>Тёмный первый экран во всю ширину с фотографией объекта, ближе к референсу promsystems.su.</p>
-      <ul>
-        <li>Продукция прокручивается лентой вбок</li>
-        <li>Производители строками с номерами</li>
-        <li>Этапы работы на тёмной плашке</li>
-        <li>Фотография первого экрана медленно наезжает и уходит при прокрутке</li>
-      </ul>
-      <span class="go">Открыть вариант 2 →</span>
-    </a>
-    <a class="card" href="v3.html">
-      <span class="tag">Движения больше всего</span>
-      <b>Вариант 3. Выразительный</b>
-      <p>Первый экран на всю высоту окна с чертёжной сеткой, шапка перекрашивается при прокрутке.</p>
-      <ul>
-        <li>Путь заказа отдельной лентой с фотографиями</li>
-        <li>Продукция раскрывается при наведении</li>
-        <li>Производители наезжают карточками друг на друга</li>
-        <li>Кнопки опросных листов тянутся к курсору</li>
-      </ul>
-      <span class="go">Открыть вариант 3 →</span>
-    </a>
-  </div>
-
-  <div class="block">
-    <h2>Что уже заложено</h2>
-    <p class="lede" style="margin-top:0">Структура из семи разделов: главная, о компании, продукция по типам оборудования, производители, опросные листы, документы, контакты. На главной есть отдельная кнопка «Подобрать по ТЗ» и блок опросных листов – это конверсионный инструмент, которого на старом сайте нет.</p>
-  </div>
-
-  <div class="block">
-    <h2>Что нужно от заказчика</h2>
-    <div class="q">
-      <div><b>Каталоги PDF по пяти производителям</b><span>Кнопки «Скачать каталог» сейчас ведут в никуда</span></div>
-      <div><b>Документы и сертификаты</b><span>Нужны файлы или хотя бы список того, что будет в разделе</span></div>
-      <div><b>Фотографии оборудования и объектов</b><span>Сейчас стоят временные снимки. Свои фото всегда сильнее стоковых</span></div>
-      <div><b>Цифры о компании</b><span>Сколько лет работы, география, количество проектов. Пока в блоке цифр стоит только год основания и число производителей</span></div>
-      <div><b>Решение по блоку «Заказчики»</b><span>Логотипы клиентов можно показывать только с их разрешения. Пока блока нет</span></div>
-      <div><b>Решение по новостям</b><span>Раздел живёт, только если кто-то его ведёт. На старом сайте последняя новость от 2015 года</span></div>
-      <div><b>Контакты и реквизиты</b><span>Адрес офиса и склада, почта для запросов</span></div>
-    </div>
-  </div>
-</div>
+<ul>
+  <li><a href="v1.html">Вариант 1 <em>→</em></a></li>
+  <li><a href="v2.html">Вариант 2 <em>→</em></a></li>
+  <li><a href="v3.html">Вариант 3 <em>→</em></a></li>
+</ul>
 </body>
 </html>
