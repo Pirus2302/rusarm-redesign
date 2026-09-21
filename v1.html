@@ -74,20 +74,21 @@ p{margin:0}
 .burger{display:none}
 
 /* ---------- hero ---------- */
-.hero{padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(40px,5vw,80px)}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);align-items:center}
+.hero{padding-top:clamp(36px,4vw,60px);padding-bottom:clamp(40px,5vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:stretch}
+.hero-col{display:grid;grid-template-rows:1fr auto;gap:clamp(24px,3vw,40px)}
+.hero-text{align-self:center}
 .hero h1{font-size:clamp(26px,3.3vw,46px);text-wrap:balance}
 .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
 .hero h1 .w>span{display:inline-block}
 .hero .lede{margin-top:20px;font-size:clamp(16px,1.3vw,19px)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.hero-media{position:relative}
-.hero-media .ph{overflow:hidden;border-radius:var(--r)}
-.hero-media img{width:100%;height:clamp(280px,38vw,440px);object-fit:cover;border-radius:var(--r)}
+.hero-media{position:relative;display:flex}
+.hero-media .ph{flex:1;overflow:hidden;border-radius:var(--r);display:flex}
+.hero-media img{width:100%;height:100%;min-height:clamp(300px,32vw,470px);object-fit:cover;border-radius:var(--r)}
 .hero-stats{
   display:grid;grid-template-columns:repeat(3,1fr);
   background:var(--navy-800);color:#fff;border-radius:var(--r);
-  margin-top:12px;
 }
 .hero-stats div{padding:18px 20px}
 .hero-stats div+div{border-left:1px solid rgba(255,255,255,.18)}
@@ -236,6 +237,10 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
 }
 @media (max-width:900px){
   .hero-grid,.about-grid,.cta-grid,.why{grid-template-columns:1fr}
+  .hero-col{display:contents}
+  .hero-text{order:1}
+  .hero-media{order:2}
+  .hero-stats{order:3}
   .why div:last-child{border-bottom:0}
   .bento,.mfr{grid-template-columns:repeat(2,1fr)}
   .tile,.tile-photo,.tile-s,.tile-w,.mfr-card,.mfr-card:nth-child(1),.mfr-card:nth-child(2){grid-column:span 1}
@@ -292,21 +297,23 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
   <!-- HERO: асимметричный сплит -->
   <section class="sec hero">
     <div class="wrap hero-grid">
-      <div>
-        <h1 id="heroTitle">Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
-        <p class="lede hero-fade" data-delay="1">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
-        <div class="hero-cta hero-fade" data-delay="2">
-          <a class="btn btn-primary" href="#request">Отправить запрос</a>
-          <a class="btn btn-ghost" href="#request">Подобрать по ТЗ</a>
+      <div class="hero-col">
+        <div class="hero-text">
+          <h1 id="heroTitle">Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
+          <p class="lede hero-fade" data-delay="1">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
+          <div class="hero-cta hero-fade" data-delay="2">
+            <a class="btn btn-primary" href="#request">Отправить запрос</a>
+            <a class="btn btn-ghost" href="#request">Подобрать по ТЗ</a>
+          </div>
         </div>
-      </div>
-      <div class="hero-media">
-        <div class="ph"><img src="https://images.unsplash.com/photo-1622534376374-fe4480328daa?w=1400&q=70" alt="Трубопроводная обвязка с приводной арматурой на промышленном объекте"></div>
         <div class="hero-stats hero-fade" data-delay="3">
           <div><b class="count" data-to="2001">2001</b><span>год основания компании</span></div>
           <div><b class="count" data-to="5">5</b><span>представляемых производителей</span></div>
           <div><b class="txt">РФ и КНР</b><span>география производства</span></div>
         </div>
+      </div>
+      <div class="hero-media">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1622534376374-fe4480328daa?w=1400&q=70" alt="Трубопроводная обвязка с приводной арматурой на промышленном объекте"></div>
       </div>
     </div>
   </section>
