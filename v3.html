@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Русармкомплект – вариант 3</title>
+<script>document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0D2A4E;
+  --navy-800:#123A6B;
+  --navy-600:#1C4E8F;
+  --navy-050:#EEF3F9;
+  --accent:#C2500B;
+  --accent-bright:#F2761B;
+  --ink:#16222E;
+  --ink-mid:#4A5768;
+  --line:#DCE3EC;
+  --paper:#FFFFFF;
+  --paper-2:#F6F8FB;
+  --r:4px;
+  --gut:clamp(16px,4vw,48px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 'Onest',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.06}
+h2{font-size:clamp(28px,4vw,52px)}
+h3{font-size:20px;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
+.sec{padding-block:clamp(64px,8vw,128px)}
+.lede{color:var(--ink-mid);max-width:58ch}
+:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:2px}
+
+/* ---------- кнопки ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;height:50px;padding:0 24px;border-radius:var(--r);border:1px solid transparent;font:600 15px/1 'Onest',sans-serif;cursor:pointer;white-space:nowrap;overflow:hidden;transition:background .25s var(--ease),border-color .25s,color .25s,transform .25s var(--ease)}
+.btn>span{position:relative;z-index:1}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary::before{content:"";position:absolute;inset:0;background:#8F3806;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.btn-primary:hover::before{transform:scaleX(1)}
+.btn-ghost{background:transparent;color:var(--navy-800);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--navy-600);background:var(--navy-050)}
+.btn-onimg{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5);color:#fff;backdrop-filter:blur(8px)}
+.btn-onimg:hover{background:rgba(255,255,255,.2)}
+.btn-onnavy{background:#fff;color:var(--navy-900)}
+.btn-onnavy:hover{background:var(--navy-050)}
+.btn-sm{height:42px;padding:0 18px;font-size:14px}
+
+/* ---------- шапка ---------- */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .35s var(--ease),border-color .35s,backdrop-filter .35s}
+.hdr-in{display:flex;align-items:center;gap:28px;height:76px;border-bottom:1px solid rgba(255,255,255,.18);transition:border-color .35s}
+.hdr.solid{background:rgba(255,255,255,.93);backdrop-filter:blur(12px)}
+.hdr.solid .hdr-in{border-color:var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;color:#fff;white-space:nowrap;transition:color .35s}
+.hdr.solid .logo{color:var(--ink)}
+.logo-mark{width:30px;height:30px;flex:none}
+.logo-mark .plate{transition:fill .35s}
+.hdr.solid .logo-mark .plate{fill:var(--navy-800)}
+.logo-mark .stroke{transition:stroke .35s}
+.nav{display:flex;gap:22px;margin-left:auto;font-size:15px;color:rgba(255,255,255,.85);white-space:nowrap;transition:color .35s}
+.hdr.solid .nav{color:var(--ink-mid)}
+.nav a{position:relative;padding-block:8px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent-bright);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.hdr-tel{font-weight:600;font-size:15px;color:#fff;white-space:nowrap;transition:color .35s}
+.hdr.solid .hdr-tel{color:var(--ink)}
+.burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);border-radius:var(--r);background:transparent}
+.hdr.solid .burger{border-color:var(--line)}
+.hdr.solid .burger path{stroke:var(--ink)}
+
+/* ---------- ПЕРВЫЙ ЭКРАН ---------- */
+.hero{position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;background:var(--navy-900)}
+.hero-bg{position:absolute;inset:-6% 0 0;will-change:transform}
+.hero-bg img{width:100%;height:112%;object-fit:cover;transform:scale(1.14);animation:heroZoom 2.4s var(--ease) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(9,25,45,.95) 0%,rgba(9,25,45,.8) 42%,rgba(9,25,45,.35) 100%)}
+/* чертёжная сетка */
+.grid-lines{position:absolute;inset:0;pointer-events:none;display:grid;grid-template-columns:repeat(6,1fr);opacity:0}
+.grid-lines i{border-left:1px solid rgba(255,255,255,.1)}
+.grid-lines i:first-child{border-left:0}
+.hero-in{position:relative;z-index:2;color:#fff;padding-top:76px}
+.hero h1{font-size:clamp(30px,5.6vw,72px);max-width:17ch}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w>span{display:inline-block;transform:translateY(105%);opacity:0}
+.hero .lede{color:rgba(255,255,255,.85);margin-top:26px;font-size:clamp(16px,1.4vw,20px);max-width:50ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.hero-rule{height:2px;background:var(--accent-bright);width:0;margin-bottom:30px}
+.hero-fade{opacity:0;transform:translateY(20px)}
+
+/* ---------- ЦИФРЫ ---------- */
+.facts{background:var(--navy-800);color:#fff}
+.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);padding-block:clamp(28px,3.4vw,44px);gap:clamp(20px,4vw,48px)}
+.fact b{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(26px,3.2vw,40px);letter-spacing:-.02em}
+.fact span{display:block;margin-top:8px;color:rgba(255,255,255,.72);font-size:15px;max-width:26ch}
+.fact b .count{display:inline;margin:0;font:inherit;color:inherit;max-width:none}
+
+/* ---------- ПУТЬ: липкая горизонтальная панорама ---------- */
+.pan{position:relative;background:var(--paper-2);border-block:1px solid var(--line)}
+.pan-head{padding-block:clamp(48px,6vw,88px) 0}
+.pan-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:18px;padding:clamp(28px,4vw,48px) var(--gut) clamp(48px,6vw,80px);overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+.pan-track>*{scroll-snap-align:center}
+.pan-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .4s var(--ease),box-shadow .4s var(--ease)}
+.pan-card:hover{border-color:var(--navy-600);transform:translateY(-4px);box-shadow:0 18px 44px rgba(18,58,107,.1)}
+.pan-card .ph{position:relative;overflow:hidden;height:190px}
+.pan-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.pan-card:hover .ph img{transform:scale(1.06)}
+.pan-card .n{position:absolute;left:16px;top:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:13px;color:#fff;background:rgba(13,42,78,.82);padding:4px 9px;border-radius:2px}
+.pan-body{padding:22px;display:grid;gap:10px}
+.pan-body p{color:var(--ink-mid);font-size:15px}
+
+/* ---------- ПРОДУКЦИЯ: сетка с раскрытием ---------- */
+.cat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.cat-item{position:relative;overflow:hidden;border-radius:var(--r);min-height:330px;display:flex;align-items:flex-end;border:1px solid var(--line);background:var(--navy-900)}
+.cat-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.66;transition:transform .9s var(--ease),opacity .5s}
+.cat-item:hover img{transform:scale(1.07);opacity:.82}
+.cat-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(9,25,45,.94) 8%,rgba(9,25,45,.25) 62%)}
+.cat-body{position:relative;z-index:2;padding:24px;color:#fff;width:100%}
+.cat-body h3{transition:transform .45s var(--ease)}
+.cat-more{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s,margin-top .5s var(--ease)}
+.cat-item:hover .cat-more,.cat-item:focus-within .cat-more{max-height:140px;opacity:1;margin-top:10px}
+.cat-more p{color:rgba(255,255,255,.85);font-size:15px}
+.cat-more .go{display:inline-block;margin-top:12px;font-size:14px;font-weight:600;border-bottom:2px solid var(--accent-bright);padding-bottom:2px}
+.cat-item.wide{grid-column:span 2}
+
+/* ---------- ПРОИЗВОДИТЕЛИ: наезжающие карточки ---------- */
+.stackwrap{background:var(--navy-900);color:#fff}
+.stack{position:relative}
+.stack-card{position:sticky;top:calc(50dvh - 180px);background:var(--navy-800);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:clamp(24px,3vw,40px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,40px);align-items:center;margin-bottom:18px;box-shadow:0 -12px 40px rgba(0,0,0,.28)}
+.stack-card .n{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent-bright)}
+.stack-card h3{font-size:clamp(20px,2.4vw,30px);color:#fff}
+.stack-card .geo{font-size:13px;color:rgba(255,255,255,.6);margin-top:6px}
+.stack-card p{color:rgba(255,255,255,.78);font-size:15px;margin-top:12px;max-width:52ch}
+
+/* ---------- ПОЧЕМУ ---------- */
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(28px,5vw,72px);margin-top:16px}
+.why-item{padding-block:26px;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.why-item h3{font-size:19px}
+.why-item p{color:var(--ink-mid);font-size:15px;max-width:44ch}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--navy-800);color:#fff;position:relative;overflow:hidden}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;position:relative;z-index:2}
+.cta h2{color:#fff}
+.cta .lede{color:rgba(255,255,255,.78);margin-top:18px}
+.magnet{display:inline-block;will-change:transform;transition:transform .5s var(--ease)}
+form{display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;color:rgba(255,255,255,.85)}
+.field input,.field textarea{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.28);border-radius:var(--r);color:#fff;font:400 16px/1.4 'Onest',sans-serif;padding:14px;transition:border-color .25s,background .25s}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.55)}
+.field input:hover,.field textarea:hover{border-color:rgba(255,255,255,.5)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--accent-bright);outline-offset:1px;border-color:transparent;background:rgba(255,255,255,.12)}
+.field textarea{min-height:92px;resize:vertical}
+.form-note{font-size:13px;color:rgba(255,255,255,.65)}
+
+/* ---------- ДОКУМЕНТЫ ---------- */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+.doc{border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:10px;transition:border-color .3s,transform .4s var(--ease)}
+.doc:hover{border-color:var(--navy-600);transform:translateY(-3px)}
+.doc svg{width:32px;height:32px;color:var(--navy-600)}
+.doc b{font-size:17px;font-weight:600}
+.doc span{font-size:14px;color:var(--ink-mid)}
+
+/* ---------- ПОДВАЛ ---------- */
+.ftr{background:var(--navy-900);color:rgba(255,255,255,.72);padding-block:56px 32px;font-size:15px}
+.ftr-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px}
+.ftr h4{margin:0 0 14px;color:#fff;font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.ftr ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.ftr a:hover{color:#fff}
+.ftr .logo{color:#fff}
+.ftr-btm{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.5)}
+
+/* ---------- появление ---------- */
+html.js .rv{opacity:0;transform:translateY(22px)}
+html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .rv{opacity:1;transform:none}
+  .hero-bg img{animation:none;transform:none}
+  .hero h1 .w>span{transform:none;opacity:1}
+  .hero-fade{opacity:1;transform:none}
+  .hero-rule{width:120px}
+  .grid-lines{opacity:1}
+  .stack-card{position:static}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+@media (max-width:1080px){
+  .nav{display:none}
+  .burger{display:inline-flex;margin-left:auto}
+}
+@media (max-width:900px){
+  .facts-grid{grid-template-columns:1fr;gap:22px}
+  .cat{grid-template-columns:repeat(2,1fr)}
+  .cat-item.wide{grid-column:span 2}
+  .cat-more{max-height:140px;opacity:1;margin-top:10px}
+  .stack-card{grid-template-columns:auto 1fr;position:static;box-shadow:none}
+  .stack-card .btn{grid-column:2;justify-self:start}
+  .why,.cta-grid{grid-template-columns:1fr}
+  .docs{grid-template-columns:1fr 1fr}
+  .ftr-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .hdr-tel{display:none}
+  .cat,.docs{grid-template-columns:1fr}
+  .cat-item.wide{grid-column:span 1}
+  .cat-item{min-height:260px}
+  .form-row{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr}
+  .pan-track{grid-auto-columns:minmax(230px,84%)}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect class="plate" width="32" height="32" rx="4" fill="#fff"/>
+        <path class="stroke" d="M16 7v18M9 11h14M11 22h10" stroke="#123A6B" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+      </svg>
+      РУСАРМКОМПЛЕКТ
+    </a>
+    <nav class="nav">
+      <a href="#about">О компании</a>
+      <a href="#products">Продукция</a>
+      <a href="#mfr">Производители</a>
+      <a href="#request">Опросные листы</a>
+      <a href="#docs">Документы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <span class="hdr-tel">+7 (495) 783-00-06</span>
+    <button class="burger" aria-label="Меню">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="#fff" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ПЕРВЫЙ ЭКРАН -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg">
+      <img src="https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?w=2000&q=75" alt="Промышленный объект нефтепереработки в вечернее время">
+    </div>
+    <div class="grid-lines" id="gridLines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="wrap hero-in">
+      <div class="hero-rule" id="heroRule"></div>
+      <h1 id="heroTitle">Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
+      <p class="lede hero-fade" data-delay="1">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
+      <div class="hero-cta hero-fade" data-delay="2">
+        <a class="btn btn-primary" href="#request"><span>Отправить запрос</span></a>
+        <a class="btn btn-onimg" href="#request"><span>Подобрать по ТЗ</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦИФРЫ -->
+  <section class="facts">
+    <div class="wrap facts-grid">
+      <div class="fact rv"><b><span class="count" data-to="2001" data-prefix="с ">с 2001</span></b><span>работаем с промышленными предприятиями России и СНГ</span></div>
+      <div class="fact rv"><b>5 заводов</b><span>производители, которых мы представляем напрямую</span></div>
+      <div class="fact rv"><b>РФ и КНР</b><span>подбираем аналоги, когда привычная позиция недоступна</span></div>
+    </div>
+  </section>
+
+  <!-- ПУТЬ ЗАКАЗА -->
+  <section class="pan" id="about">
+    <div class="wrap pan-head">
+      <h2 class="rv">От технического задания до объекта</h2>
+      <p class="lede rv" style="margin-top:16px">Весь путь проходит через одного ответственного за результат. Это убирает стыки, на которых обычно теряются сроки.</p>
+    </div>
+    <div class="pan-track">
+      <article class="pan-card rv">
+        <div class="ph"><span class="n">01</span><img src="https://images.unsplash.com/photo-1620203853151-496c7228306c?w=800&q=70" alt="Технологическая обвязка трубопроводов"></div>
+        <div class="pan-body"><h3>Получаем техническое задание</h3><p>Изучаем требования проекта и параметры оборудования.</p></div>
+      </article>
+      <article class="pan-card rv">
+        <div class="ph"><span class="n">02</span><img src="https://images.unsplash.com/photo-1780034766224-04cfda73fa09?w=800&q=70" alt="Электропривод для трубопроводной арматуры"></div>
+        <div class="pan-body"><h3>Подбираем оборудование</h3><p>Выбираем решение среди продукции представляемых производителей.</p></div>
+      </article>
+      <article class="pan-card rv">
+        <div class="ph"><span class="n">03</span><img src="https://images.unsplash.com/photo-1786294112341-b86211513b92?w=800&q=70" alt="Согласование технического решения на объекте"></div>
+        <div class="pan-body"><h3>Согласовываем решение</h3><p>Сопровождаем техническое и коммерческое согласование с участниками проекта.</p></div>
+      </article>
+      <article class="pan-card rv">
+        <div class="ph"><span class="n">04</span><img src="https://images.unsplash.com/photo-1612438137269-70c848e102e1?w=800&q=70" alt="Монтаж трубопровода на объекте"></div>
+        <div class="pan-body"><h3>Организуем поставку</h3><p>Контролируем комплектацию и поставку оборудования заказчику.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ПРОДУКЦИЯ -->
+  <section class="sec" id="products">
+    <div class="wrap">
+      <h2 class="rv">Арматура и приводы под параметры проекта</h2>
+      <p class="lede rv" style="margin-top:16px">Среда, давление, температура, присоединение, тип привода. Наводите на карточку, чтобы увидеть состав.</p>
+
+      <div class="cat">
+        <a class="cat-item wide rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1698031610493-c19fa20dfeab?w=1200&q=70" alt="Запорные клапаны на трубопроводе">
+          <div class="cat-body">
+            <h3>Запорная арматура</h3>
+            <div class="cat-more">
+              <p>Задвижки, клапаны запорные, шаровые краны, дисковые затворы</p>
+              <span class="go">Подобрать</span>
+            </div>
+          </div>
+        </a>
+        <a class="cat-item rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1780034766356-a0ac12bdc819?w=800&q=70" alt="Приводная техника для арматуры">
+          <div class="cat-body">
+            <h3>Приводная техника</h3>
+            <div class="cat-more">
+              <p>Электро-, пневмо-, гидро- и электрогидроприводы, редукторы</p>
+              <span class="go">Подобрать</span>
+            </div>
+          </div>
+        </a>
+        <a class="cat-item rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1559569283-327b99858782?w=800&q=70" alt="Регулирующая арматура">
+          <div class="cat-body">
+            <h3>Регулирующая арматура</h3>
+            <div class="cat-more">
+              <p>Клапаны регулирующие и запорно-регулирующие, регуляторы давления</p>
+              <span class="go">Подобрать</span>
+            </div>
+          </div>
+        </a>
+        <a class="cat-item wide rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1538474705339-e87de81450e8?w=1200&q=70" alt="Защитная арматура на трубопроводе">
+          <div class="cat-body">
+            <h3>Защитная арматура</h3>
+            <div class="cat-more">
+              <p>Клапаны обратные и предохранительные, конденсатоотводчики</p>
+              <span class="go">Подобрать</span>
+            </div>
+          </div>
+        </a>
+        <a class="cat-item wide rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1622534376374-fe4480328daa?w=1200&q=70" alt="Узел арматуры с приводом в сборе">
+          <div class="cat-body">
+            <h3>Комплектация узла в сборе</h3>
+            <div class="cat-more">
+              <p>Арматура вместе с приводом, собранная и проверенная под вашу задачу</p>
+              <span class="go">Обсудить задачу</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРОИЗВОДИТЕЛИ -->
+  <section class="sec stackwrap" id="mfr">
+    <div class="wrap">
+      <h2 class="rv" style="color:#fff;margin-bottom:8px">Производители, которых мы представляем</h2>
+      <p class="rv" style="color:rgba(255,255,255,.75);max-width:52ch;margin-bottom:clamp(28px,4vw,56px)">По каждому заводу есть каталог с техническими характеристиками.</p>
+      <div class="stack">
+        <article class="stack-card">
+          <span class="n">01</span>
+          <div><h3>ТРУТОРК РУС</h3><p class="geo">Россия</p><p>Промышленные приводы для трубопроводной арматуры: электрические, пневматические, гидравлические.</p></div>
+          <a class="btn btn-onnavy btn-sm" href="#"><span>Каталог, PDF</span></a>
+        </article>
+        <article class="stack-card">
+          <span class="n">02</span>
+          <div><h3>ПОТОК</h3><p class="geo">Россия</p><p>Запорная и регулирующая арматура для промышленных трубопроводов.</p></div>
+          <a class="btn btn-onnavy btn-sm" href="#"><span>Каталог, PDF</span></a>
+        </article>
+        <article class="stack-card">
+          <span class="n">03</span>
+          <div><h3>HENGCHUN</h3><p class="geo">Китай</p><p>Электрические и пневматические приводы для запорной арматуры.</p></div>
+          <a class="btn btn-onnavy btn-sm" href="#"><span>Каталог, PDF</span></a>
+        </article>
+        <article class="stack-card">
+          <span class="n">04</span>
+          <div><h3>TIANTE</h3><p class="geo">Китай</p><p>Трубопроводная арматура общепромышленного применения.</p></div>
+          <a class="btn btn-onnavy btn-sm" href="#"><span>Каталог, PDF</span></a>
+        </article>
+        <article class="stack-card">
+          <span class="n">05</span>
+          <div><h3>BEIZE</h3><p class="geo">Китай</p><p>Запорная арматура и комплектующие для трубопроводных систем.</p></div>
+          <a class="btn btn-onnavy btn-sm" href="#"><span>Каталог, PDF</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОЧЕМУ -->
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="rv">Почему Русармкомплект</h2>
+      <div class="why">
+        <div class="why-item rv"><h3>Подбор под требования проекта</h3><p>Отталкиваемся от параметров среды и условий эксплуатации, а не от складских остатков.</p></div>
+        <div class="why-item rv"><h3>Российские и китайские производители</h3><p>Подбираем аналог, когда привычная позиция стала недоступной.</p></div>
+        <div class="why-item rv"><h3>Техническое сопровождение согласования</h3><p>Отрабатываем замечания проектировщика и службы эксплуатации.</p></div>
+        <div class="why-item rv"><h3>Комплексная поставка</h3><p>Арматура, приводы и комплектующие приходят одним поставщиком.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec cta" id="request">
+    <div class="wrap cta-grid">
+      <div>
+        <h2 class="rv">Пришлите техническое задание</h2>
+        <p class="lede rv">Ответим с подбором и сроками поставки. Если готового ТЗ нет, заполните опросный лист по типу оборудования.</p>
+        <div class="hero-cta rv">
+          <span class="magnet" data-magnet><a class="btn btn-onnavy" href="#"><span>Опросный лист на арматуру</span></a></span>
+          <span class="magnet" data-magnet><a class="btn btn-onnavy" href="#"><span>Опросный лист на привод</span></a></span>
+        </div>
+      </div>
+      <form class="rv">
+        <div class="form-row">
+          <div class="field"><label for="f3-name">Имя</label><input id="f3-name" type="text" placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="f3-org">Организация</label><input id="f3-org" type="text" placeholder="Название компании"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f3-tel">Телефон</label><input id="f3-tel" type="tel" placeholder="+7 ___ ___-__-__"></div>
+          <div class="field"><label for="f3-mail">Почта</label><input id="f3-mail" type="email" placeholder="name@company.ru"></div>
+        </div>
+        <div class="field"><label for="f3-task">Задача</label><textarea id="f3-task" placeholder="Тип арматуры, DN, PN, среда, температура, тип привода"></textarea></div>
+        <button class="btn btn-primary" type="submit"><span>Отправить запрос</span></button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ДОКУМЕНТЫ -->
+  <section class="sec" id="docs">
+    <div class="wrap">
+      <h2 class="rv">Документы и сертификаты</h2>
+      <p class="lede rv" style="margin-top:16px">Продукция сопровождается паспортами и сертификатами заводов-изготовителей.</p>
+      <div class="docs">
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+          <b>Сертификаты соответствия</b><span>Документы на поставляемую продукцию</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v6c0 4-3.4 7.2-8 8-4.6-.8-8-4-8-8V7l8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <b>Разрешительная документация</b><span>Разрешения на применение</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M4 19h16"/></svg>
+          <b>Каталоги производителей</b><span>Технические характеристики, PDF</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr" id="contacts">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <a class="logo" href="#">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="4" fill="#1C4E8F"/>
+            <path d="M16 7v18M9 11h14M11 22h10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+          </svg>
+          РУСАРМКОМПЛЕКТ
+        </a>
+        <p style="margin-top:16px;max-width:34ch">Комплексные поставки трубопроводной арматуры и приводного оборудования.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#about">О компании</a></li>
+          <li><a href="#products">Продукция</a></li>
+          <li><a href="#mfr">Производители</a></li>
+          <li><a href="#docs">Документы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Запрос</h4>
+        <ul>
+          <li><a href="#request">Отправить ТЗ</a></li>
+          <li><a href="#request">Опросный лист на арматуру</a></li>
+          <li><a href="#request">Опросный лист на привод</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74957830006">+7 (495) 783-00-06</a></li>
+          <li><a href="mailto:info@rusarmkomplekt.ru">info@rusarmkomplekt.ru</a></li>
+          <li>Москва, адрес уточняется</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-btm">
+      <span>ООО «Русармкомплект»</span>
+      <span>Прототип для согласования, тексты не утверждены</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- первый экран: заголовок по словам ---- */
+  var title = document.getElementById('heroTitle');
+  var words = title.textContent.trim().split(/\s+/);
+  title.textContent = '';
+  words.forEach(function(w, i){
+    var outer = document.createElement('span');
+    outer.className = 'w';
+    var inner = document.createElement('span');
+    inner.textContent = w;
+    outer.appendChild(inner);
+    title.appendChild(outer);
+    if (i < words.length - 1) title.appendChild(document.createTextNode(' '));
+  });
+
+  var anims = [];
+  function playHero(){
+    var inners = title.querySelectorAll('.w>span');
+    inners.forEach(function(el, i){
+      anims.push(el.animate(
+        [{transform:'translateY(105%)', opacity:0}, {transform:'translateY(0)', opacity:1}],
+        {duration:900, delay:140 + i*55, easing:'cubic-bezier(.16,1,.3,1)', fill:'both'}
+      ));
+    });
+    var total = 140 + inners.length*55;
+    anims.push(document.getElementById('heroRule').animate(
+      [{width:'0px'}, {width:'120px'}],
+      {duration:700, delay:80, easing:'cubic-bezier(.16,1,.3,1)', fill:'both'}
+    ));
+    anims.push(document.getElementById('gridLines').animate(
+      [{opacity:0}, {opacity:1}],
+      {duration:1400, delay:300, easing:'ease-out', fill:'both'}
+    ));
+    document.querySelectorAll('.hero-fade').forEach(function(el){
+      anims.push(el.animate(
+        [{opacity:0, transform:'translateY(20px)'}, {opacity:1, transform:'none'}],
+        {duration:800, delay: total + 120 * (+el.dataset.delay || 1), easing:'cubic-bezier(.16,1,.3,1)', fill:'both'}
+      ));
+    });
+  }
+
+  function showHero(){
+    anims.forEach(function(a){ try { a.cancel(); } catch (e) {} });
+    title.querySelectorAll('.w>span').forEach(function(el){ el.style.transform='none'; el.style.opacity=1; });
+    document.getElementById('heroRule').style.width='120px';
+    document.getElementById('gridLines').style.opacity=1;
+    document.querySelectorAll('.hero-fade').forEach(function(el){ el.style.opacity=1; el.style.transform='none'; });
+  }
+
+  if (reduce) {
+    showHero();
+  } else {
+    try { playHero(); } catch (err) { showHero(); }
+    // страховка: анимация не должна оставить первый экран пустым
+    setTimeout(showHero, 3500);
+  }
+
+  /* ---- появление блоков ---- */
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('rv-in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var idx = Array.prototype.indexOf.call(el.parentNode.children, el) % 4;
+        setTimeout(function(){ el.classList.add('rv-in'); }, idx * 70);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ items.forEach(function(el){ el.classList.add('rv-in'); }); }, 2500);
+  }
+
+  /* ---- шапка: белая после первого экрана ---- */
+  var hdr = document.getElementById('hdr');
+  var sentinel = document.createElement('div');
+  sentinel.style.cssText = 'position:absolute;top:90dvh;height:1px;width:1px';
+  document.querySelector('.hero').appendChild(sentinel);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(e){
+      hdr.classList.toggle('solid', !e[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
+  }
+
+  /* ---- параллакс первого экрана, без слушателя прокрутки ---- */
+  var heroBg = document.getElementById('heroBg');
+  if (!reduce && window.ViewTimeline && CSS.supports('animation-timeline: view()')) {
+    heroBg.animate(
+      [{transform:'translateY(0)'}, {transform:'translateY(9%)'}],
+      { fill:'both', timeline: new ViewTimeline({ subject: document.querySelector('.hero'), axis:'block' }) }
+    );
+  }
+
+  /* ---- счётчики ---- */
+  function runCount(el){
+    var to = parseFloat(el.dataset.to);
+    var pre = el.dataset.prefix || '';
+    var suf = el.dataset.suffix || '';
+    var from = to > 1000 ? to - 24 : 0;
+    var t0 = performance.now(), dur = 1200;
+    function step(now){
+      var p = Math.min(1, (now - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + Math.round(from + (to - from) * eased) + suf;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if (!reduce && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        runCount(e.target);
+        cio.unobserve(e.target);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.count').forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ---- магнитные кнопки ---- */
+  if (!reduce && matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('[data-magnet]').forEach(function(box){
+      box.addEventListener('pointermove', function(ev){
+        var r = box.getBoundingClientRect();
+        var dx = (ev.clientX - (r.left + r.width / 2)) * 0.22;
+        var dy = (ev.clientY - (r.top + r.height / 2)) * 0.3;
+        box.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+        box.style.transitionDuration = '0ms';
+      });
+      box.addEventListener('pointerleave', function(){
+        box.style.transitionDuration = '';
+        box.style.transform = '';
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
