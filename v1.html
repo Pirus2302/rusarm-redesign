@@ -46,11 +46,11 @@ p{margin:0}
 /* ---------- header ---------- */
 .hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .35s var(--ease),height .35s var(--ease)}
 .hdr.scrolled{box-shadow:0 8px 28px rgba(18,58,107,.08)}
-.hdr-in{display:flex;align-items:center;gap:28px;height:72px;transition:height .35s var(--ease)}
+.hdr-in{display:flex;align-items:center;gap:22px;height:72px;transition:height .35s var(--ease)}
 .hdr.scrolled .hdr-in{height:62px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
 .logo-mark{width:30px;height:30px;flex:none}
-.nav{display:flex;gap:22px;margin-left:auto;font-size:15px;color:var(--ink-mid);white-space:nowrap}
+.nav{display:flex;gap:18px;margin-left:auto;font-size:14px;color:var(--ink-mid);white-space:nowrap}
 .nav a{position:relative;padding-block:6px;transition:color .2s}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent-bright);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
 .nav a:hover{color:var(--navy-800)}
@@ -214,6 +214,25 @@ form{display:grid;gap:14px}
 .ftr .logo{color:#fff}
 .ftr-btm{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.5)}
 
+
+/* ---------- решения ---------- */
+.sol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.sol-card{border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;gap:12px;background:#fff;transition:border-color .25s,transform .35s var(--ease),box-shadow .35s var(--ease)}
+.sol-card:hover{border-color:var(--navy-600);transform:translateY(-3px);box-shadow:0 14px 34px rgba(18,58,107,.08)}
+.sol-card h3{font-size:clamp(19px,1.8vw,23px)}
+.sol-card p{color:var(--ink-mid);font-size:15px}
+.sol-card ul{margin:2px 0 0;padding:0;list-style:none;display:grid;gap:9px;color:var(--ink-mid);font-size:15px}
+.sol-card li{position:relative;padding-left:18px}
+.sol-card li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:1px;background:var(--accent)}
+.sol-card .go{margin-top:auto;padding-top:16px;font-size:14px;font-weight:600;color:var(--navy-600)}
+
+/* ---------- клиенты ---------- */
+.clients{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,2vw,26px);margin-top:36px;align-items:center}
+.clients div{display:flex;align-items:center;justify-content:center;min-height:64px}
+.clients img{max-width:100%;max-height:52px;width:auto;height:auto;object-fit:contain;filter:grayscale(1);opacity:.62;transition:filter .35s,opacity .35s,transform .35s var(--ease)}
+.clients div:hover img{filter:none;opacity:1;transform:scale(1.05)}
+@media (max-width:900px){.sol{grid-template-columns:1fr}.clients{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.clients{grid-template-columns:repeat(2,1fr)}}
 /* ---------- появление ---------- */
 html.js .rv{opacity:0;transform:translateY(18px)}
 html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -230,7 +249,10 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
 }
 
 /* ---------- адаптив ---------- */
-@media (max-width:1080px){
+@media (min-width:1200px) and (max-width:1399px){
+  .hdr-tel{display:none}
+}
+@media (max-width:1199px){
   .nav{display:none}
   .burger{display:inline-flex;margin-left:auto;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
   .hdr-tel{margin-left:0}
@@ -279,13 +301,14 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
     <nav class="nav">
       <a href="#about">О компании</a>
       <a href="#products">Продукция</a>
-      <a href="#mfr">Производители</a>
+      <a href="#solutions">Решения</a>
+      <a href="#mfr">Производство</a>
       <a href="#request">Опросные листы</a>
       <a href="#docs">Документы</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <span class="hdr-tel">+7 (495) 783-00-06</span>
-    <a class="btn btn-primary btn-sm" href="#request">Отправить запрос</a>
+    <a class="btn btn-primary btn-sm" href="#request">Запрос</a>
     <button class="burger" aria-label="Меню">
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="#16222E" stroke-width="2"/></svg>
     </button>
@@ -356,6 +379,39 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
           <h3>Комплектация узла</h3>
           <p>Арматура вместе с приводом, собранная и проверенная под задачу</p>
           <span class="tile-link">Обсудить задачу →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- РЕШЕНИЯ: блочно-модульные установки и автоматизация -->
+  <section class="sec" id="solutions">
+    <div class="wrap">
+      <h2>Решения под объект, а не только позиции из каталога</h2>
+      <p class="lede" style="margin-top:14px">Кроме арматуры и приводов мы делаем то, ради чего к поставщику обращаются повторно: собираем установки и автоматизируем управление ими.</p>
+      <div class="sol">
+        <div class="sol-card rv">
+          <h3>Блочно-модульные установки</h3>
+          <p>Проектируем и производим совместно с конструкторским бюро ЗАО ИЦ «ТЕХНОХИМ» на базе сосудов, насосов и теплообменного оборудования.</p>
+          <ul>
+            <li>Подготовка попутного, технологического и топливного газа</li>
+            <li>Очистка газа от сероводорода и углекислого газа</li>
+            <li>Комплексная подготовка нефти и попутно добываемой воды</li>
+            <li>Фильтрация сырья, масел, кислот и щелочей, водоподготовка</li>
+          </ul>
+          <span class="go">Обсудить установку →</span>
+        </div>
+        <div class="sol-card rv">
+          <h3>Системы автоматизации</h3>
+          <p>Разрабатываем АСУ в составе комплексной поставки, чтобы оборудование приходило на объект уже управляемым.</p>
+          <ul>
+            <li>Электроприводы и навесное оборудование</li>
+            <li>Шкафы управления и КИП</li>
+            <li>Программное обеспечение на оборудование комплекса</li>
+            <li>Сертификаты по регламентам заводов-изготовителей</li>
+          </ul>
+          <span class="go">Обсудить автоматизацию →</span>
         </div>
       </div>
     </div>
@@ -484,6 +540,32 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
     </div>
   </section>
 
+
+  <!-- КЛИЕНТЫ -->
+  <section class="sec" id="clients">
+    <div class="wrap">
+      <h2>Нам доверяют</h2>
+      <p class="lede" style="margin-top:14px">Оборудование поставляется на объекты нефтегазовых, химических, энергетических и добывающих компаний.</p>
+      <div class="clients">
+        <div class="rv"><img src="logos/lukoil.png" alt="Лукойл" loading="lazy"></div>
+        <div class="rv"><img src="logos/rosneft.png" alt="Роснефть" loading="lazy"></div>
+        <div class="rv"><img src="logos/gazpromneft.png" alt="Газпром нефть" loading="lazy"></div>
+        <div class="rv"><img src="logos/russneft.png" alt="РуссНефть" loading="lazy"></div>
+        <div class="rv"><img src="logos/ruskhimalyans.png" alt="Русхимальянс" loading="lazy"></div>
+        <div class="rv"><img src="logos/sibur.png" alt="СИБУР" loading="lazy"></div>
+        <div class="rv"><img src="logos/kazanorgsintez.png" alt="Казаньоргсинтез" loading="lazy"></div>
+        <div class="rv"><img src="logos/tatneft.png" alt="Татнефть" loading="lazy"></div>
+        <div class="rv"><img src="logos/nnk.png" alt="ННК" loading="lazy"></div>
+        <div class="rv"><img src="logos/e4.png" alt="Группа Е4" loading="lazy"></div>
+        <div class="rv"><img src="logos/alrosa.png" alt="АЛРОСА" loading="lazy"></div>
+        <div class="rv"><img src="logos/surgutneftegas.png" alt="Сургутнефтегаз" loading="lazy"></div>
+        <div class="rv"><img src="logos/novatek.png" alt="НОВАТЭК" loading="lazy"></div>
+        <div class="rv"><img src="logos/bashneft.png" alt="Башнефть" loading="lazy"></div>
+        <div class="rv"><img src="logos/rosatom.png" alt="Росатом" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA + ФОРМА -->
   <section class="sec cta" id="request">
     <div class="wrap cta-grid">
@@ -597,7 +679,8 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
         <ul>
           <li><a href="#about">О компании</a></li>
           <li><a href="#products">Продукция</a></li>
-          <li><a href="#mfr">Производители</a></li>
+          <li><a href="#solutions">Решения</a>
+      <a href="#mfr">Производство</a></li>
           <li><a href="#docs">Документы</a></li>
         </ul>
       </div>
