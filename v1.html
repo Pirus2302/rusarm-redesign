@@ -55,6 +55,18 @@ p{margin:0}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent-bright);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
 .nav a:hover{color:var(--navy-800)}
 .nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav{align-items:center}
+.nav i{font-style:normal;font-size:8px;margin-left:5px;opacity:.55;display:inline-block;transition:transform .25s var(--ease)}
+.sub-wrap{position:relative;display:flex;align-items:center}
+.sub-wrap::after{content:"";position:absolute;left:0;right:0;top:100%;height:20px}
+.sub{position:absolute;top:calc(100% + 18px);left:-12px;min-width:236px;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 18px 44px rgba(13,42,78,.14);padding:8px;display:grid;gap:1px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .22s var(--ease),transform .3s var(--ease),visibility .22s;z-index:70}
+.sub-wrap:hover .sub,.sub-wrap:focus-within .sub{opacity:1;visibility:visible;transform:translateY(0)}
+.sub-wrap:hover>a i,.sub-wrap:focus-within>a i{transform:rotate(180deg)}
+.sub a{display:block;padding:8px 12px;border-radius:var(--r);color:var(--ink);font-size:14px;transition:background .2s,color .2s}
+.sub a::after{display:none}
+.sub a:hover{background:var(--navy-050);color:var(--navy-800)}
+.sub-lbl{padding:10px 12px 4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mid)}
+.sub-lbl+a{margin-top:0}
 .hdr-tel{font-weight:600;font-size:15px;white-space:nowrap}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -249,7 +261,7 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
 }
 
 /* ---------- адаптив ---------- */
-@media (min-width:1200px) and (max-width:1399px){
+@media (min-width:1200px){
   .hdr-tel{display:none}
 }
 @media (max-width:1199px){
@@ -300,11 +312,45 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
     </a>
     <nav class="nav">
       <a href="#about">О компании</a>
-      <a href="#products">Продукция</a>
-      <a href="#solutions">Решения</a>
-      <a href="#mfr">Производство</a>
+      <div class="sub-wrap">
+        <a href="#products">Продукция<i>&#9662;</i></a>
+        <div class="sub">
+          <a href="#products">Запорная арматура</a>
+          <a href="#products">Регулирующая арматура</a>
+          <a href="#products">Защитная арматура</a>
+          <a href="#products">Приводная техника</a>
+          <a href="#products">Комплектация узла</a>
+        </div>
+      </div>
+      <div class="sub-wrap">
+        <a href="#solutions">Решения<i>&#9662;</i></a>
+        <div class="sub">
+          <a href="#solutions">Блочно-модульные установки</a>
+          <a href="#solutions">Системы автоматизации</a>
+        </div>
+      </div>
+      <div class="sub-wrap">
+        <a href="#mfr">Производство<i>&#9662;</i></a>
+        <div class="sub">
+          <span class="sub-lbl">Собственные заводы</span>
+          <a href="#mfr">ПК ПОТОК – арматура</a>
+          <a href="#mfr">ТРУТОРК РУС – приводы</a>
+          <span class="sub-lbl">Представительство в РФ</span>
+          <a href="#mfr">HENGCHUN</a>
+          <a href="#mfr">TIANTE</a>
+          <a href="#mfr">BEIZE</a>
+        </div>
+      </div>
       <a href="#request">Опросные листы</a>
-      <a href="#docs">Документы</a>
+      <div class="sub-wrap">
+        <a href="#docs">Документы<i>&#9662;</i></a>
+        <div class="sub">
+          <a href="#docs">Сертификаты соответствия</a>
+          <a href="#docs">Паспорта изделий</a>
+          <a href="#docs">Разрешительная документация</a>
+          <a href="#docs">Каталоги производителей</a>
+        </div>
+      </div>
       <a href="#contacts">Контакты</a>
     </nav>
     <span class="hdr-tel">+7 (495) 783-00-06</span>
@@ -698,7 +744,7 @@ html.js .hero-media .ph img{clip-path:inset(0 0 100% 0)}
           <li><a href="tel:+74957830006">+7 (495) 783-00-06</a></li>
           <li><a href="mailto:info@rusarmkomplekt.ru">info@rusarmkomplekt.ru</a></li>
           <li><a href="mailto:sale@rusarmkomplekt.ru">sale@rusarmkomplekt.ru</a></li>
-          <li>125371, Москва, Волоколамское шоссе, 116, строение 4</li>
+          <li>123298, Москва, ул. 3-я Хорошевская, 18к2</li>
           <li>Склад: Московская область, Одинцовский район, д. Хлюпино</li>
         </ul>
       </div>
