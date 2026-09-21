@@ -48,8 +48,8 @@ p{margin:0}
 .btn-primary:hover::before{transform:scaleX(1)}
 .btn-ghost{background:transparent;color:var(--navy-800);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--navy-600);background:var(--navy-050)}
-.btn-onimg{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5);color:#fff;backdrop-filter:blur(8px)}
-.btn-onimg:hover{background:rgba(255,255,255,.2)}
+.btn-onimg{background:rgba(13,42,78,.5);border-color:rgba(255,255,255,.55);color:#fff}
+.btn-onimg:hover{background:rgba(13,42,78,.75)}
 .btn-onnavy{background:#fff;color:var(--navy-900)}
 .btn-onnavy:hover{background:var(--navy-050)}
 .btn-sm{height:42px;padding:0 18px;font-size:14px}
@@ -86,8 +86,9 @@ p{margin:0}
 .grid-lines{position:absolute;inset:0;pointer-events:none;display:grid;grid-template-columns:repeat(6,1fr);opacity:0}
 .grid-lines i{border-left:1px solid rgba(255,255,255,.1)}
 .grid-lines i:first-child{border-left:0}
-.hero-in{position:relative;z-index:2;color:#fff;padding-top:76px}
-.hero h1{font-size:clamp(30px,5.6vw,72px);max-width:17ch}
+.hero-in{position:relative;z-index:2;color:#fff;width:100%;min-height:100dvh;padding-top:76px;padding-bottom:26px;display:grid;grid-template-rows:1fr auto;gap:clamp(24px,4vw,48px)}
+.hero-main{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(28px,4vw,60px);align-items:center}
+.hero h1{font-size:clamp(30px,3.9vw,54px);max-width:18ch;text-wrap:balance}
 .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
 .hero h1 .w>span{display:inline-block;transform:translateY(105%);opacity:0}
 .hero .lede{color:rgba(255,255,255,.85);margin-top:26px;font-size:clamp(16px,1.4vw,20px);max-width:50ch}
@@ -95,12 +96,21 @@ p{margin:0}
 .hero-rule{height:2px;background:var(--accent-bright);width:0;margin-bottom:30px}
 .hero-fade{opacity:0;transform:translateY(20px)}
 
-/* ---------- ЦИФРЫ ---------- */
-.facts{background:var(--navy-800);color:#fff}
-.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);padding-block:clamp(28px,3.4vw,44px);gap:clamp(20px,4vw,48px)}
-.fact b{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(26px,3.2vw,40px);letter-spacing:-.02em}
-.fact span{display:block;margin-top:8px;color:rgba(255,255,255,.72);font-size:15px;max-width:26ch}
-.fact b .count{display:inline;margin:0;font:inherit;color:inherit;max-width:none}
+/* быстрый вход по типам оборудования */
+.hero-side{border-left:1px solid rgba(255,255,255,.24);padding-left:clamp(20px,2.4vw,36px)}
+.hero-side .cap{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);font-weight:600}
+.hero-side ul{margin:18px 0 0;padding:0;list-style:none}
+.hero-side li+li{border-top:1px solid rgba(255,255,255,.16)}
+.hero-side a{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;font-size:clamp(15px,1.15vw,17px);font-weight:500;color:rgba(255,255,255,.9);transition:color .25s,padding-left .35s var(--ease)}
+.hero-side a em{font-style:normal;color:var(--accent-bright);transform:translateX(-4px);opacity:0;transition:transform .35s var(--ease),opacity .25s}
+.hero-side a:hover{color:#fff;padding-left:8px}
+.hero-side a:hover em{transform:none;opacity:1}
+
+/* цифры по нижней кромке первого экрана */
+.hero-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px);border-top:1px solid rgba(255,255,255,.24);padding-top:22px}
+.hero-facts b{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(20px,2vw,28px);letter-spacing:-.02em}
+.hero-facts b .count{font:inherit;color:inherit}
+.hero-facts span{display:block;margin-top:6px;color:rgba(255,255,255,.72);font-size:14px;max-width:30ch}
 
 /* ---------- ПУТЬ: липкая горизонтальная панорама ---------- */
 .pan{position:relative;background:var(--paper-2);border-block:1px solid var(--line)}
@@ -133,7 +143,7 @@ p{margin:0}
 /* ---------- ПРОИЗВОДИТЕЛИ: наезжающие карточки ---------- */
 .stackwrap{background:var(--navy-900);color:#fff}
 .stack{position:relative}
-.stack-card{position:sticky;top:calc(50dvh - 180px);background:var(--navy-800);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:clamp(24px,3vw,40px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,40px);align-items:center;margin-bottom:18px;box-shadow:0 -12px 40px rgba(0,0,0,.28)}
+.stack-card{position:sticky;top:calc(50dvh - 180px);background:var(--navy-800);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:clamp(24px,3vw,40px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,40px);align-items:center;margin-bottom:18px;box-shadow:0 -8px 22px rgba(0,0,0,.25)}
 .stack-card .n{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent-bright)}
 .stack-card h3{font-size:clamp(20px,2.4vw,30px);color:#fff}
 .stack-card .geo{font-size:13px;color:rgba(255,255,255,.6);margin-top:6px}
@@ -199,8 +209,16 @@ html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .7s var(--ease),tr
   .nav{display:none}
   .burger{display:inline-flex;margin-left:auto}
 }
+@media (max-width:1080px){
+  .hero-main{grid-template-columns:1fr;align-items:start}
+  .hero-side{border-left:0;border-top:1px solid rgba(255,255,255,.24);padding-left:0;padding-top:22px;margin-top:36px}
+  .hero-side ul{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+  .hero-side li:nth-child(2){border-top:0}
+}
 @media (max-width:900px){
-  .facts-grid{grid-template-columns:1fr;gap:22px}
+  .hero,.hero-in{min-height:auto}
+  .hero-in{padding-block:clamp(110px,18vw,150px) 36px;grid-template-rows:auto auto}
+  .hero-facts{grid-template-columns:1fr;gap:18px}
   .cat{grid-template-columns:repeat(2,1fr)}
   .cat-item.wide{grid-column:span 2}
   .cat-more{max-height:140px;opacity:1;margin-top:10px}
@@ -212,6 +230,8 @@ html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .7s var(--ease),tr
 }
 @media (max-width:640px){
   .hdr-tel{display:none}
+  .hero-side ul{grid-template-columns:1fr}
+  .hero-side li:nth-child(2){border-top:1px solid rgba(255,255,255,.16)}
   .cat,.docs{grid-template-columns:1fr}
   .cat-item.wide{grid-column:span 1}
   .cat-item{min-height:260px}
@@ -257,22 +277,32 @@ html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .7s var(--ease),tr
     </div>
     <div class="grid-lines" id="gridLines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="wrap hero-in">
-      <div class="hero-rule" id="heroRule"></div>
-      <h1 id="heroTitle">Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
-      <p class="lede hero-fade" data-delay="1">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
-      <div class="hero-cta hero-fade" data-delay="2">
-        <a class="btn btn-primary" href="#request"><span>Отправить запрос</span></a>
-        <a class="btn btn-onimg" href="#request"><span>Подобрать по ТЗ</span></a>
+      <div class="hero-main">
+        <div>
+          <div class="hero-rule" id="heroRule"></div>
+          <h1 id="heroTitle">Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
+          <p class="lede hero-fade" data-delay="1">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
+          <div class="hero-cta hero-fade" data-delay="2">
+            <a class="btn btn-primary" href="#request"><span>Отправить запрос</span></a>
+            <a class="btn btn-onimg" href="#request"><span>Подобрать по ТЗ</span></a>
+          </div>
+        </div>
+        <div class="hero-side hero-fade" data-delay="3">
+          <p class="cap">Что подбираем</p>
+          <ul>
+            <li><a href="#products">Запорная арматура <em>→</em></a></li>
+            <li><a href="#products">Приводная техника <em>→</em></a></li>
+            <li><a href="#products">Регулирующая арматура <em>→</em></a></li>
+            <li><a href="#products">Защитная арматура <em>→</em></a></li>
+            <li><a href="#products">Комплектация узла в сборе <em>→</em></a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ЦИФРЫ -->
-  <section class="facts">
-    <div class="wrap facts-grid">
-      <div class="fact rv"><b><span class="count" data-to="2001" data-prefix="с ">с 2001</span></b><span>работаем с промышленными предприятиями России и СНГ</span></div>
-      <div class="fact rv"><b>5 заводов</b><span>производители, которых мы представляем напрямую</span></div>
-      <div class="fact rv"><b>РФ и КНР</b><span>подбираем аналоги, когда привычная позиция недоступна</span></div>
+      <div class="hero-facts hero-fade" data-delay="4">
+        <div><b><span class="count" data-to="2001" data-prefix="с ">с 2001</span></b><span>работаем с промышленными предприятиями России и СНГ</span></div>
+        <div><b>5 заводов</b><span>производители, которых мы представляем напрямую</span></div>
+        <div><b>РФ и КНР</b><span>подбираем аналоги, когда привычная позиция недоступна</span></div>
+      </div>
     </div>
   </section>
 
@@ -626,8 +656,10 @@ html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .7s var(--ease),tr
     var cio = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
-        runCount(e.target);
-        cio.unobserve(e.target);
+        var el = e.target;
+        // в первом экране счётчик ждёт, пока блок проявится
+        setTimeout(function(){ runCount(el); }, el.closest('.hero') ? 1500 : 0);
+        cio.unobserve(el);
       });
     }, { threshold: 0.6 });
     document.querySelectorAll('.count').forEach(function(el){ cio.observe(el); });
