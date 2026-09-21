@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Русармкомплект – вариант 2</title>
+<script>document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0D2A4E;
+  --navy-800:#123A6B;
+  --navy-600:#1C4E8F;
+  --navy-050:#EEF3F9;
+  --accent:#C2500B;
+  --accent-bright:#F2761B;
+  --ink:#16222E;
+  --ink-mid:#4A5768;
+  --line:#DCE3EC;
+  --paper:#FFFFFF;
+  --paper-2:#F6F8FB;
+  --r:4px;
+  --gut:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 'Onest',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.08}
+h2{font-size:clamp(28px,3.8vw,46px)}
+h3{font-size:20px;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
+.sec{padding-block:clamp(56px,7vw,110px)}
+.lede{color:var(--ink-mid);max-width:60ch}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+
+/* header поверх героя */
+.hdr{position:absolute;top:0;left:0;right:0;z-index:50}
+.hdr-in{display:flex;align-items:center;gap:28px;height:78px;border-bottom:1px solid rgba(255,255,255,.18)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;color:#fff;white-space:nowrap}
+.logo-mark{width:30px;height:30px;flex:none}
+.nav{display:flex;gap:22px;margin-left:auto;font-size:15px;color:rgba(255,255,255,.82);white-space:nowrap}
+.nav a{padding-block:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:#fff;border-color:var(--accent-bright)}
+.hdr-tel{font-weight:600;font-size:15px;color:#fff;white-space:nowrap}
+.burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);border-radius:var(--r);background:transparent}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:var(--r);border:1px solid transparent;font:600 15px/1 'Onest',sans-serif;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,transform .12s,color .2s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#A94409}
+.btn-ghost{background:transparent;color:var(--navy-800);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--navy-600);background:var(--navy-050)}
+.btn-onimg{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55);color:#fff;backdrop-filter:blur(6px)}
+.btn-onimg:hover{background:rgba(255,255,255,.22)}
+.btn-onnavy{background:#fff;color:var(--navy-900)}
+.btn-onnavy:hover{background:var(--navy-050)}
+.btn-sm{height:42px;padding:0 18px;font-size:14px}
+
+/* HERO: полноширинное фото */
+.hero{position:relative;min-height:clamp(560px,86dvh,780px);display:flex;align-items:flex-end;padding-bottom:clamp(48px,6vw,80px);overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(9,25,45,.92) 0%,rgba(9,25,45,.72) 45%,rgba(9,25,45,.38) 100%)}
+.hero-in{position:relative;color:#fff;max-width:900px}
+.hero h1{font-size:clamp(26px,5vw,62px);text-wrap:balance}
+.hero .lede{color:rgba(255,255,255,.84);margin-top:22px;font-size:clamp(16px,1.35vw,20px);max-width:58ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+
+/* цифры */
+.facts{border-bottom:1px solid var(--line)}
+.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,56px);padding-block:clamp(32px,4vw,52px)}
+.fact b{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(28px,3.4vw,42px);color:var(--navy-800);letter-spacing:-.02em}
+.fact span{display:block;margin-top:8px;color:var(--ink-mid);font-size:15px;max-width:26ch}
+
+/* ПРОДУКЦИЯ: горизонтальная лента */
+.rail-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.rail{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:36px}
+@media(max-width:1100px){.rail{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(240px,72%);overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding-bottom:12px;scrollbar-width:thin}}
+.rail>*{scroll-snap-align:start}
+.rail-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.rail-card:hover{border-color:var(--navy-600);transform:translateY(-3px)}
+.rail-card img{width:100%;height:170px;object-fit:cover}
+.rail-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rail-body p{color:var(--ink-mid);font-size:15px}
+.rail-body .go{margin-top:auto;padding-top:14px;font-size:14px;font-weight:600;color:var(--navy-600)}
+.rail-card.plain{background:var(--navy-800);color:#fff;border-color:var(--navy-800)}
+.rail-card.plain p{color:rgba(255,255,255,.8)}
+.rail-card.plain .go{color:#fff}
+
+/* ПРОИЗВОДИТЕЛИ: нумерованные строки */
+.mfr-list{margin-top:40px;border-top:1px solid var(--line)}
+.mfr-row{display:grid;grid-template-columns:64px 1.1fr 1.4fr auto;gap:clamp(16px,3vw,40px);align-items:center;padding-block:26px;border-bottom:1px solid var(--line);transition:background .2s}
+.mfr-row:hover{background:var(--paper-2)}
+.mfr-row .n{font-family:'JetBrains Mono',monospace;color:var(--ink-mid);font-size:15px}
+.mfr-row h3{font-size:22px}
+.mfr-row .geo{font-size:13px;color:var(--ink-mid);margin-top:4px}
+.mfr-row p{color:var(--ink-mid);font-size:15px}
+
+/* ШАГИ: вертикально, крупные цифры */
+.flow{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,5vw,72px);align-items:start}
+.flow-side{position:sticky;top:48px}
+.flow-item{display:grid;grid-template-columns:auto 1fr;gap:20px;padding-block:22px}
+.flow-item+.flow-item{border-top:1px solid rgba(255,255,255,.16)}
+.flow-item .n{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent-bright);padding-top:5px}
+.flow-item h3{color:#fff}
+.flow-item p{color:rgba(255,255,255,.76);font-size:15px;margin-top:8px}
+.flow-side h2{color:#fff}
+.flow-side .lede{color:rgba(255,255,255,.78);margin-top:18px}
+
+/* ОТРАСЛИ: бенто с фото */
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px;margin-top:36px}
+.ind-cell{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);display:flex;align-items:flex-end;padding:18px;font-weight:600}
+.ind-cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ind-cell span{position:relative;z-index:1}
+.ind-cell.photo{color:#fff}
+.ind-cell.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,42,78,.88),rgba(13,42,78,.12))}
+.ind-cell.photo span{z-index:2}
+.ind-cell.flat{background:var(--paper-2);color:var(--ink)}
+.ind-cell.navy{background:var(--navy-800);color:#fff;border-color:var(--navy-800)}
+.ind-wide{grid-column:span 2}
+
+/* ПОЧЕМУ: 2 колонки без карточек */
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,4vw,56px);margin-top:36px}
+.why-item{padding-top:18px;border-top:2px solid var(--navy-800)}
+.why-item p{color:var(--ink-mid);font-size:15px;margin-top:10px}
+
+/* CTA */
+.cta{background:var(--navy-800);color:#fff}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.cta h2{color:#fff}
+.cta .lede{color:rgba(255,255,255,.78);margin-top:16px}
+form{display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;color:rgba(255,255,255,.85)}
+.field input,.field textarea{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.28);border-radius:var(--r);color:#fff;font:400 16px/1.4 'Onest',sans-serif;padding:13px 14px}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.55)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--accent-bright);outline-offset:1px;border-color:transparent}
+.field textarea{min-height:92px;resize:vertical}
+.form-note{font-size:13px;color:rgba(255,255,255,.65)}
+
+/* ДОКУМЕНТЫ */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
+.doc{border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;transition:border-color .2s,transform .2s}
+.doc:hover{border-color:var(--navy-600);transform:translateY(-2px)}
+.doc svg{width:32px;height:32px;color:var(--navy-600)}
+.doc b{font-size:17px;font-weight:600}
+.doc span{font-size:14px;color:var(--ink-mid)}
+
+/* НОВОСТИ */
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px);margin-top:32px}
+.news article{border:1px solid var(--line);border-radius:var(--r);padding:22px;transition:border-color .2s}
+.news article:hover{border-color:var(--navy-600)}
+.news time{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-mid)}
+.news h3{margin-top:10px;font-size:17px}
+.news p{color:var(--ink-mid);font-size:15px;margin-top:8px}
+
+/* FOOTER */
+.ftr{background:var(--navy-900);color:rgba(255,255,255,.72);padding-block:56px 32px;font-size:15px}
+.ftr-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px}
+.ftr h4{margin:0 0 14px;color:#fff;font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.ftr ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.ftr a:hover{color:#fff}
+.ftr-btm{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.5)}
+
+html.js .rv{opacity:0;transform:translateY(18px)}
+html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .rv{opacity:1;transform:none}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+@media (max-width:1080px){
+  .nav{display:none}
+  .burger{display:inline-flex;margin-left:auto}
+}
+@media (max-width:900px){
+  .facts-grid{grid-template-columns:1fr;gap:24px}
+  .flow,.cta-grid,.why{grid-template-columns:1fr}
+  .flow-side{position:static}
+  .mfr-row{grid-template-columns:40px 1fr;row-gap:10px}
+  .mfr-row p{grid-column:2}
+  .mfr-row .btn{grid-column:2;justify-self:start}
+  .ind-grid{grid-template-columns:repeat(2,1fr)}
+  .docs{grid-template-columns:1fr 1fr}
+  .news{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .hdr-tel{display:none}
+  .ind-grid{grid-template-columns:1fr;grid-auto-rows:150px}
+  .ind-wide{grid-column:span 1}
+  .docs{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="4" fill="#fff"/>
+        <path d="M16 7v18M9 11h14M11 22h10" stroke="#123A6B" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+      </svg>
+      РУСАРМКОМПЛЕКТ
+    </a>
+    <nav class="nav">
+      <a href="#about">О компании</a>
+      <a href="#products">Продукция</a>
+      <a href="#mfr">Производители</a>
+      <a href="#request">Опросные листы</a>
+      <a href="#docs">Документы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <span class="hdr-tel">+7 (495) 783-00-06</span>
+    <button class="burger" aria-label="Меню">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="#fff" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO: медийный, полноширинный -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?w=2000&q=70" alt="Промышленный объект нефтепереработки в вечернее время">
+    </div>
+    <div class="wrap hero-in">
+      <h1>Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
+      <p class="lede">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#request">Отправить запрос</a>
+        <a class="btn btn-onimg" href="#request">Подобрать по ТЗ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦИФРЫ -->
+  <section class="facts">
+    <div class="wrap facts-grid">
+      <div class="fact rv"><b>с 2001</b><span>работаем с промышленными предприятиями России и СНГ</span></div>
+      <div class="fact rv"><b>5 заводов</b><span>производители, которых мы представляем напрямую</span></div>
+      <div class="fact rv"><b>РФ и КНР</b><span>подбираем аналоги, когда привычная позиция недоступна</span></div>
+    </div>
+  </section>
+
+  <!-- ПРОДУКЦИЯ: горизонтальная лента -->
+  <section class="sec" id="products">
+    <div class="wrap">
+      <div class="rail-head">
+        <div>
+          <p class="eyebrow">Что мы поставляем</p>
+          <h2>Арматура и приводы под параметры проекта</h2>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="#">Вся продукция</a>
+      </div>
+
+      <div class="rail">
+        <a class="rail-card rv" href="#">
+          <img src="https://images.unsplash.com/photo-1698031610493-c19fa20dfeab?w=800&q=70" alt="Запорные клапаны на трубопроводе">
+          <div class="rail-body">
+            <h3>Запорная арматура</h3>
+            <p>Задвижки, клапаны запорные, шаровые краны, дисковые затворы</p>
+            <span class="go">Подобрать →</span>
+          </div>
+        </a>
+        <a class="rail-card rv" href="#">
+          <img src="https://images.unsplash.com/photo-1780034766224-04cfda73fa09?w=800&q=70" alt="Электропривод с редуктором для арматуры">
+          <div class="rail-body">
+            <h3>Приводная техника</h3>
+            <p>Электро-, пневмо-, гидро- и электрогидроприводы, редукторы</p>
+            <span class="go">Подобрать →</span>
+          </div>
+        </a>
+        <a class="rail-card rv" href="#">
+          <img src="https://images.unsplash.com/photo-1786294112341-b86211513b92?w=800&q=70" alt="Обвязка трубопровода с регулирующей арматурой">
+          <div class="rail-body">
+            <h3>Регулирующая арматура</h3>
+            <p>Клапаны регулирующие и запорно-регулирующие, регуляторы давления</p>
+            <span class="go">Подобрать →</span>
+          </div>
+        </a>
+        <a class="rail-card rv" href="#">
+          <img src="https://images.unsplash.com/photo-1620203853151-496c7228306c?w=800&q=70" alt="Технологическая обвязка трубопроводов">
+          <div class="rail-body">
+            <h3>Защитная арматура</h3>
+            <p>Клапаны обратные и предохранительные, конденсатоотводчики</p>
+            <span class="go">Подобрать →</span>
+          </div>
+        </a>
+        <a class="rail-card plain rv" href="#request">
+          <div class="rail-body">
+            <h3>Не нашли позицию</h3>
+            <p>Пришлите параметры среды, давление, температуру и присоединение. Подберём аналог среди продукции наших производителей.</p>
+            <span class="go">Отправить запрос →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О КОМПАНИИ -->
+  <section class="sec" id="about" style="background:var(--paper-2);border-block:1px solid var(--line)">
+    <div class="wrap" style="display:grid;grid-template-columns:1fr;gap:20px;max-width:900px">
+      <h2>Компания продаёт не позиции, а решённую задачу</h2>
+      <p class="lede" style="max-width:none">Русармкомплект работает с 2001 года. Мы поставляем трубопроводную арматуру и приводную технику промышленным предприятиям России и стран СНГ, а начинается работа не со склада, а с технического задания.</p>
+      <p class="lede" style="max-width:none">Подбор под требования проекта, техническое согласование, комплектация и поставка проходят через одного поставщика. Это убирает стыки, на которых обычно теряются сроки.</p>
+      <div><a class="btn btn-ghost" href="#">Подробнее о компании</a></div>
+    </div>
+  </section>
+
+  <!-- ПРОИЗВОДИТЕЛИ: строками -->
+  <section class="sec" id="mfr">
+    <div class="wrap">
+      <h2>Производители, которых мы представляем</h2>
+      <p class="lede" style="margin-top:14px">По каждому заводу есть каталог с техническими характеристиками.</p>
+
+      <div class="mfr-list">
+        <div class="mfr-row rv">
+          <span class="n">01</span>
+          <div><h3>ТРУТОРК РУС</h3><p class="geo">Россия</p></div>
+          <p>Промышленные приводы для трубопроводной арматуры: электрические, пневматические, гидравлические</p>
+          <a class="btn btn-ghost btn-sm" href="#">Каталог, PDF</a>
+        </div>
+        <div class="mfr-row rv">
+          <span class="n">02</span>
+          <div><h3>ПОТОК</h3><p class="geo">Россия</p></div>
+          <p>Запорная и регулирующая арматура для промышленных трубопроводов</p>
+          <a class="btn btn-ghost btn-sm" href="#">Каталог, PDF</a>
+        </div>
+        <div class="mfr-row rv">
+          <span class="n">03</span>
+          <div><h3>HENGCHUN</h3><p class="geo">Китай</p></div>
+          <p>Электрические и пневматические приводы для запорной арматуры</p>
+          <a class="btn btn-ghost btn-sm" href="#">Каталог, PDF</a>
+        </div>
+        <div class="mfr-row rv">
+          <span class="n">04</span>
+          <div><h3>TIANTE</h3><p class="geo">Китай</p></div>
+          <p>Трубопроводная арматура общепромышленного применения</p>
+          <a class="btn btn-ghost btn-sm" href="#">Каталог, PDF</a>
+        </div>
+        <div class="mfr-row rv">
+          <span class="n">05</span>
+          <div><h3>BEIZE</h3><p class="geo">Китай</p></div>
+          <p>Запорная арматура и комплектующие для трубопроводных систем</p>
+          <a class="btn btn-ghost btn-sm" href="#">Каталог, PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК РАБОТАЕМ: тёмная секция -->
+  <section class="sec" style="background:var(--navy-800)">
+    <div class="wrap flow">
+      <div class="flow-side">
+        <h2>Как мы работаем</h2>
+        <p class="lede">Путь от технического задания до оборудования на объекте проходит через одного ответственного за результат.</p>
+      </div>
+      <div>
+        <div class="flow-item rv">
+          <span class="n">01</span>
+          <div><h3>Получаем техническое задание</h3><p>Изучаем требования проекта и параметры оборудования.</p></div>
+        </div>
+        <div class="flow-item rv">
+          <span class="n">02</span>
+          <div><h3>Подбираем оборудование</h3><p>Выбираем решение среди продукции представляемых производителей.</p></div>
+        </div>
+        <div class="flow-item rv">
+          <span class="n">03</span>
+          <div><h3>Согласовываем решение</h3><p>Сопровождаем техническое и коммерческое согласование с участниками проекта.</p></div>
+        </div>
+        <div class="flow-item rv">
+          <span class="n">04</span>
+          <div><h3>Организуем поставку</h3><p>Контролируем комплектацию и поставку оборудования заказчику.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОТРАСЛИ: бенто -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>Отрасли</h2>
+      <p class="lede" style="margin-top:14px">Оборудование подбирается под рабочую среду и условия конкретного производства.</p>
+      <div class="ind-grid">
+        <div class="ind-cell photo ind-wide rv">
+          <img src="https://images.unsplash.com/photo-1726731782158-fcf6822b6ca4?w=1000&q=70" alt="Установка нефтепереработки">
+          <span>Нефтепереработка</span>
+        </div>
+        <div class="ind-cell photo rv">
+          <img src="https://images.unsplash.com/photo-1559510981-10719ce4266a?w=800&q=70" alt="Магистральный газопровод">
+          <span>Газовая промышленность</span>
+        </div>
+        <div class="ind-cell navy rv"><span>Химия и нефтехимия</span></div>
+        <div class="ind-cell flat rv"><span>Энергетика</span></div>
+        <div class="ind-cell photo ind-wide rv">
+          <img src="https://images.unsplash.com/photo-1612438137269-70c848e102e1?w=1000&q=70" alt="Строительство трубопровода">
+          <span>Трубопроводный транспорт</span>
+        </div>
+        <div class="ind-cell flat rv"><span>Теплоснабжение и ЖКХ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОЧЕМУ -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <h2>Почему Русармкомплект</h2>
+      <div class="why">
+        <div class="why-item rv"><h3>Подбор под требования проекта</h3><p>Отталкиваемся от параметров среды и условий эксплуатации, а не от складских остатков.</p></div>
+        <div class="why-item rv"><h3>Российские и китайские производители</h3><p>Подбираем аналог, когда привычная позиция стала недоступной.</p></div>
+        <div class="why-item rv"><h3>Техническое сопровождение согласования</h3><p>Отрабатываем замечания проектировщика и службы эксплуатации.</p></div>
+        <div class="why-item rv"><h3>Комплексная поставка</h3><p>Арматура, приводы и комплектующие приходят одним поставщиком.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec cta" id="request">
+    <div class="wrap cta-grid">
+      <div>
+        <p class="eyebrow" style="color:var(--accent-bright)">Опросные листы</p>
+        <h2>Пришлите техническое задание</h2>
+        <p class="lede">Ответим с подбором и сроками поставки. Если готового ТЗ нет, заполните опросный лист по типу оборудования.</p>
+        <div class="hero-cta">
+          <a class="btn btn-onnavy" href="#">Опросный лист на арматуру</a>
+          <a class="btn btn-onnavy" href="#">Опросный лист на привод</a>
+        </div>
+      </div>
+      <form>
+        <div class="form-row">
+          <div class="field"><label for="f2-name">Имя</label><input id="f2-name" type="text" placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="f2-org">Организация</label><input id="f2-org" type="text" placeholder="Название компании"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f2-tel">Телефон</label><input id="f2-tel" type="tel" placeholder="+7 ___ ___-__-__"></div>
+          <div class="field"><label for="f2-mail">Почта</label><input id="f2-mail" type="email" placeholder="name@company.ru"></div>
+        </div>
+        <div class="field"><label for="f2-task">Задача</label><textarea id="f2-task" placeholder="Тип арматуры, DN, PN, среда, температура, тип привода"></textarea></div>
+        <button class="btn btn-primary" type="submit">Отправить запрос</button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ДОКУМЕНТЫ -->
+  <section class="sec" id="docs">
+    <div class="wrap">
+      <h2>Документы и сертификаты</h2>
+      <p class="lede" style="margin-top:14px">Продукция сопровождается паспортами и сертификатами заводов-изготовителей.</p>
+      <div class="docs">
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+          <b>Сертификаты соответствия</b><span>Документы на поставляемую продукцию</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v6c0 4-3.4 7.2-8 8-4.6-.8-8-4-8-8V7l8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <b>Разрешительная документация</b><span>Разрешения на применение</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M4 19h16"/></svg>
+          <b>Каталоги производителей</b><span>Технические характеристики, PDF</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВОСТИ -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <h2>Новости</h2>
+      <div class="news">
+        <article class="rv">
+          <time datetime="2026-09-04">04.09.2026</time>
+          <h3>Расширили линейку приводов ТРУТОРК РУС</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+        <article class="rv">
+          <time datetime="2026-08-19">19.08.2026</time>
+          <h3>Поставка запорной арматуры на объект теплоснабжения</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+        <article class="rv">
+          <time datetime="2026-07-30">30.07.2026</time>
+          <h3>Обновили опросные листы для подбора оборудования</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr" id="contacts">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <a class="logo" href="#">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="4" fill="#1C4E8F"/>
+            <path d="M16 7v18M9 11h14M11 22h10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+          </svg>
+          РУСАРМКОМПЛЕКТ
+        </a>
+        <p style="margin-top:16px;max-width:34ch">Комплексные поставки трубопроводной арматуры и приводного оборудования.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#about">О компании</a></li>
+          <li><a href="#products">Продукция</a></li>
+          <li><a href="#mfr">Производители</a></li>
+          <li><a href="#docs">Документы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Запрос</h4>
+        <ul>
+          <li><a href="#request">Отправить ТЗ</a></li>
+          <li><a href="#request">Опросный лист на арматуру</a></li>
+          <li><a href="#request">Опросный лист на привод</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74957830006">+7 (495) 783-00-06</a></li>
+          <li><a href="mailto:info@rusarmkomplekt.ru">info@rusarmkomplekt.ru</a></li>
+          <li>Москва, адрес уточняется</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-btm">
+      <span>ООО «Русармкомплект»</span>
+      <span>Прототип для согласования, тексты не утверждены</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('rv-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var delay = (Array.prototype.indexOf.call(el.parentNode.children, el) % 4) * 60;
+      setTimeout(function(){ el.classList.add('rv-in'); }, delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15 });
+  items.forEach(function(el){ io.observe(el); });
+  // страховка: если наблюдатель по какой-то причине не сработал, показываем всё
+  setTimeout(function(){
+    items.forEach(function(el){ el.classList.add('rv-in'); });
+  }, 2500);
+})();
+</script>
+</body>
+</html>

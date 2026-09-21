@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Русармкомплект – вариант 1</title>
+<script>document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0D2A4E;
+  --navy-800:#123A6B;
+  --navy-600:#1C4E8F;
+  --navy-050:#EEF3F9;
+  --accent:#C2500B;
+  --accent-bright:#F2761B;
+  --ink:#16222E;
+  --ink-mid:#4A5768;
+  --line:#DCE3EC;
+  --paper:#FFFFFF;
+  --paper-2:#F6F8FB;
+  --r:4px;
+  --gut:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 17px/1.6 'Onest',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+h2{font-size:clamp(26px,3.4vw,40px)}
+h3{font-size:19px;letter-spacing:-.01em;line-height:1.25}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
+.sec{padding-block:clamp(56px,7vw,104px)}
+.lede{color:var(--ink-mid);max-width:62ch}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:28px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
+.logo-mark{width:30px;height:30px;flex:none}
+.nav{display:flex;gap:22px;margin-left:auto;font-size:15px;color:var(--ink-mid);white-space:nowrap}
+.nav a{padding-block:6px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--navy-800);border-color:var(--accent-bright)}
+.hdr-tel{font-weight:600;font-size:15px;white-space:nowrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:46px;padding:0 20px;border-radius:var(--r);border:1px solid transparent;
+  font:600 15px/1 'Onest',sans-serif;cursor:pointer;white-space:nowrap;
+  transition:background .2s,border-color .2s,transform .12s,color .2s;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#A94409}
+.btn-ghost{background:transparent;color:var(--navy-800);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--navy-600);background:var(--navy-050)}
+.btn-onnavy{background:#fff;color:var(--navy-900)}
+.btn-onnavy:hover{background:var(--navy-050)}
+.btn-sm{height:40px;padding:0 16px;font-size:14px}
+.burger{display:none}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(40px,5vw,80px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(26px,3.3vw,46px);text-wrap:balance}
+.hero .lede{margin-top:20px;font-size:clamp(16px,1.3vw,19px)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-media{position:relative}
+.hero-media img{width:100%;height:clamp(280px,38vw,440px);object-fit:cover;border-radius:var(--r)}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--navy-800);color:#fff;border-radius:var(--r);
+  margin-top:12px;
+}
+.hero-stats div{padding:18px 20px}
+.hero-stats div+div{border-left:1px solid rgba(255,255,255,.18)}
+.hero-stats b{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(20px,2.2vw,28px);font-weight:500;white-space:nowrap}
+.hero-stats b.txt{font-size:clamp(17px,1.5vw,20px)}
+.hero-stats span{font-size:13px;color:rgba(255,255,255,.75);line-height:1.35;display:block;margin-top:6px}
+
+/* ---------- eyebrow (используется ограниченно) ---------- */
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+
+/* ---------- bento: что поставляем ---------- */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:36px}
+.tile{
+  position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:var(--paper-2);min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:22px;transition:border-color .2s,transform .2s;
+}
+.tile:hover{border-color:var(--navy-600);transform:translateY(-2px)}
+.tile-photo{grid-column:span 3;min-height:280px;padding:0;border:0}
+.tile-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.tile-photo .tile-body{position:relative;padding:22px;background:linear-gradient(to top,rgba(13,42,78,.92),rgba(13,42,78,0));color:#fff;margin-top:auto;width:100%}
+.tile-s{grid-column:span 2}
+.tile-w{grid-column:span 3}
+.tile p{color:var(--ink-mid);font-size:15px;margin-top:8px}
+.tile-photo p{color:rgba(255,255,255,.85)}
+.tile-link{margin-top:14px;font-size:14px;font-weight:600;color:var(--navy-600);display:inline-flex;gap:6px;align-items:center}
+.tile-photo .tile-link{color:#fff}
+
+/* ---------- о компании ---------- */
+.about{background:var(--paper-2);border-block:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.about-img img{width:100%;height:clamp(240px,28vw,360px);object-fit:cover;border-radius:var(--r)}
+.about p+p{margin-top:16px}
+
+/* ---------- производители ---------- */
+.mfr{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:36px}
+.mfr-card{
+  grid-column:span 2;border:1px solid var(--line);border-radius:var(--r);padding:24px;
+  display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;background:#fff;
+}
+.mfr-card:hover{border-color:var(--navy-600);box-shadow:0 12px 30px rgba(18,58,107,.08)}
+.mfr-card:nth-child(1),.mfr-card:nth-child(2){grid-column:span 3}
+.mono-mark{
+  width:52px;height:52px;border-radius:var(--r);display:grid;place-items:center;
+  background:var(--navy-050);color:var(--navy-800);font:700 18px/1 'Onest',sans-serif;letter-spacing:-.02em;
+}
+.mfr-card h3{margin-top:18px}
+.mfr-geo{font-size:13px;color:var(--ink-mid);margin-top:6px}
+.mfr-card p{color:var(--ink-mid);font-size:15px;margin-top:12px}
+.mfr-card .btn{margin-top:auto;align-self:flex-start}
+.mfr-card .btn{margin-top:22px}
+
+/* ---------- как работаем ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:2px solid var(--navy-800)}
+.step{padding:26px 24px 30px 0;position:relative}
+.step+.step{padding-left:24px;border-left:1px solid var(--line)}
+.step-n{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);font-weight:500}
+.step h3{margin-top:12px}
+.step p{color:var(--ink-mid);font-size:15px;margin-top:10px}
+
+/* ---------- отрасли ---------- */
+.ind{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.ind span{
+  border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:15px;color:var(--ink-mid);
+  transition:border-color .2s,color .2s;
+}
+.ind span:hover{border-color:var(--navy-600);color:var(--navy-800)}
+
+/* ---------- почему ---------- */
+.why{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,5vw,72px);margin-top:12px}
+.why>div{padding:22px 0;border-bottom:1px solid var(--line)}
+.why b{font-weight:600;display:block;font-size:18px;letter-spacing:-.01em}
+.why p{color:var(--ink-mid);font-size:15px;margin-top:8px;max-width:46ch}
+
+/* ---------- cta ---------- */
+.cta{background:var(--navy-800);color:#fff}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.cta h2{color:#fff}
+.cta .lede{color:rgba(255,255,255,.78);margin-top:16px}
+form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;color:rgba(255,255,255,.85)}
+.field input,.field textarea{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.28);border-radius:var(--r);
+  color:#fff;font:400 16px/1.4 'Onest',sans-serif;padding:13px 14px;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.55)}
+.field input:focus,.field textarea:focus{outline:2px solid var(--accent-bright);outline-offset:1px;border-color:transparent}
+.field textarea{min-height:92px;resize:vertical}
+.form-note{font-size:13px;color:rgba(255,255,255,.65)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ---------- документы ---------- */
+.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
+.doc{border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.doc:hover{border-color:var(--navy-600);transform:translateY(-2px)}
+.doc-ic{width:34px;height:34px;color:var(--navy-600)}
+.doc b{font-weight:600;font-size:16px}
+.doc span{font-size:13px;color:var(--ink-mid)}
+
+/* ---------- новости ---------- */
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,36px);margin-top:32px}
+.news article{padding-top:18px;border-top:2px solid var(--navy-800)}
+.news time{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-mid)}
+.news h3{margin-top:10px;font-size:17px}
+.news p{color:var(--ink-mid);font-size:15px;margin-top:8px}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--navy-900);color:rgba(255,255,255,.72);padding-block:56px 32px;font-size:15px}
+.ftr-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px}
+.ftr h4{margin:0 0 14px;color:#fff;font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.ftr a:hover{color:#fff}
+.ftr ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.ftr .logo{color:#fff}
+.ftr-btm{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.5)}
+
+/* ---------- reveal ---------- */
+html.js .rv{opacity:0;transform:translateY(18px)}
+html.js .rv.rv-in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .rv{opacity:1;transform:none}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+/* ---------- адаптив ---------- */
+@media (max-width:1080px){
+  .nav{display:none}
+  .burger{display:inline-flex;margin-left:auto;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+  .hdr-tel{margin-left:0}
+}
+@media (max-width:900px){
+  .hero-grid,.about-grid,.cta-grid,.why{grid-template-columns:1fr}
+  .why div:last-child{border-bottom:0}
+  .bento,.mfr{grid-template-columns:repeat(2,1fr)}
+  .tile,.tile-photo,.tile-s,.tile-w,.mfr-card,.mfr-card:nth-child(1),.mfr-card:nth-child(2){grid-column:span 1}
+  .steps{grid-template-columns:1fr 1fr}
+  .step,.step+.step{padding:22px 16px 26px 0;border-left:0}
+  .docs{grid-template-columns:repeat(2,1fr)}
+  .news{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .hdr-in>.btn{display:none}
+  .hdr-in{gap:14px}
+  .logo{font-size:15px}
+}
+@media (max-width:560px){
+  .bento,.mfr,.docs,.steps,.hero-stats{grid-template-columns:1fr}
+  .hero-stats div+div{border-left:0;border-top:1px solid rgba(255,255,255,.18)}
+  .form-row{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr}
+  .hdr-tel{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="4" fill="#123A6B"/>
+        <path d="M16 7v18M9 11h14M11 22h10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+      </svg>
+      РУСАРМКОМПЛЕКТ
+    </a>
+    <nav class="nav">
+      <a href="#about">О компании</a>
+      <a href="#products">Продукция</a>
+      <a href="#mfr">Производители</a>
+      <a href="#request">Опросные листы</a>
+      <a href="#docs">Документы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <span class="hdr-tel">+7 (495) 783-00-06</span>
+    <a class="btn btn-primary btn-sm" href="#request">Отправить запрос</a>
+    <button class="burger" aria-label="Меню">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="#16222E" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO: асимметричный сплит -->
+  <section class="sec hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Комплексные поставки трубопроводной арматуры и приводного оборудования</h1>
+        <p class="lede">Подбираем оборудование под технические требования проекта, сопровождаем согласование и организуем поставку.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#request">Отправить запрос</a>
+          <a class="btn btn-ghost" href="#request">Подобрать по ТЗ</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1622534376374-fe4480328daa?w=1400&q=70" alt="Трубопроводная обвязка с приводной арматурой на промышленном объекте">
+        <div class="hero-stats">
+          <div><b>2001</b><span>год основания компании</span></div>
+          <div><b>5</b><span>представляемых производителей</span></div>
+          <div><b class="txt">РФ и КНР</b><span>география производства</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧТО ПОСТАВЛЯЕМ: бенто из 5 ячеек -->
+  <section class="sec" id="products">
+    <div class="wrap">
+      <p class="eyebrow">Что мы поставляем</p>
+      <h2>Запорная и регулирующая арматура, приводная техника</h2>
+      <p class="lede" style="margin-top:14px">Работаем по параметрам проекта: среда, давление, температура, присоединение, исполнение привода.</p>
+
+      <div class="bento">
+        <a class="tile tile-photo rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1698031610493-c19fa20dfeab?w=1000&q=70" alt="Запорные клапаны на трубопроводе">
+          <div class="tile-body">
+            <h3>Запорная арматура</h3>
+            <p>Задвижки, клапаны запорные, шаровые краны, дисковые затворы</p>
+            <span class="tile-link">Подобрать →</span>
+          </div>
+        </a>
+        <a class="tile tile-photo rv" href="#request">
+          <img src="https://images.unsplash.com/photo-1780034766224-04cfda73fa09?w=1000&q=70" alt="Электропривод для трубопроводной арматуры">
+          <div class="tile-body">
+            <h3>Приводная техника</h3>
+            <p>Электро-, пневмо-, гидро- и электрогидроприводы, редукторы</p>
+            <span class="tile-link">Подобрать →</span>
+          </div>
+        </a>
+        <div class="tile tile-s rv">
+          <h3>Регулирующая арматура</h3>
+          <p>Клапаны регулирующие и запорно-регулирующие, регуляторы давления</p>
+          <span class="tile-link">Подобрать →</span>
+        </div>
+        <div class="tile tile-s rv">
+          <h3>Защитная арматура</h3>
+          <p>Клапаны обратные и предохранительные, конденсатоотводчики</p>
+          <span class="tile-link">Подобрать →</span>
+        </div>
+        <div class="tile tile-s rv">
+          <h3>Комплектация узла</h3>
+          <p>Арматура вместе с приводом, собранная и проверенная под задачу</p>
+          <span class="tile-link">Обсудить задачу →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- О КОМПАНИИ: сплит текст + фото -->
+  <section class="sec about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <h2>О компании</h2>
+        <p class="lede" style="margin-top:18px">Русармкомплект работает с 2001 года и специализируется на поставке трубопроводной арматуры и приводной техники для промышленных предприятий России и стран СНГ.</p>
+        <p class="lede" style="margin-top:16px">Мы не просто отгружаем позиции со склада. Наша работа начинается с технического задания и заканчивается оборудованием, принятым на объекте.</p>
+        <a class="btn btn-ghost" style="margin-top:28px" href="#">Подробнее о компании</a>
+      </div>
+      <div class="about-img rv">
+        <img src="https://images.unsplash.com/photo-1507823690283-48b0929e727b?w=1200&q=70" alt="Магистральный трубопровод">
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРОИЗВОДИТЕЛИ: карточки 2 + 3 -->
+  <section class="sec" id="mfr">
+    <div class="wrap">
+      <h2>Производители, которых мы представляем</h2>
+      <p class="lede" style="margin-top:14px">Российские и китайские заводы. По каждому есть каталог с техническими характеристиками.</p>
+
+      <div class="mfr">
+        <div class="mfr-card rv">
+          <span class="mono-mark">ТР</span>
+          <h3>ТРУТОРК РУС</h3>
+          <p class="mfr-geo">Россия</p>
+          <p>Промышленные приводы для трубопроводной арматуры: электрические, пневматические, гидравлические.</p>
+          <a class="btn btn-ghost btn-sm" href="#">Скачать каталог, PDF</a>
+        </div>
+        <div class="mfr-card rv">
+          <span class="mono-mark">ПТ</span>
+          <h3>ПОТОК</h3>
+          <p class="mfr-geo">Россия</p>
+          <p>Запорная и регулирующая арматура для промышленных трубопроводов.</p>
+          <a class="btn btn-ghost btn-sm" href="#">Скачать каталог, PDF</a>
+        </div>
+        <div class="mfr-card rv">
+          <span class="mono-mark">HC</span>
+          <h3>HENGCHUN</h3>
+          <p class="mfr-geo">Китай</p>
+          <p>Электро- и пневмоприводы для запорной арматуры.</p>
+          <a class="btn btn-ghost btn-sm" href="#">Скачать каталог, PDF</a>
+        </div>
+        <div class="mfr-card rv">
+          <span class="mono-mark">TT</span>
+          <h3>TIANTE</h3>
+          <p class="mfr-geo">Китай</p>
+          <p>Трубопроводная арматура для общепромышленного применения.</p>
+          <a class="btn btn-ghost btn-sm" href="#">Скачать каталог, PDF</a>
+        </div>
+        <div class="mfr-card rv">
+          <span class="mono-mark">BZ</span>
+          <h3>BEIZE</h3>
+          <p class="mfr-geo">Китай</p>
+          <p>Запорная арматура и комплектующие для трубопроводных систем.</p>
+          <a class="btn btn-ghost btn-sm" href="#">Скачать каталог, PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК РАБОТАЕМ: лента из 4 шагов -->
+  <section class="sec" style="background:var(--paper-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <h2>Как мы работаем</h2>
+      <div class="steps">
+        <div class="step rv">
+          <span class="step-n">01</span>
+          <h3>Получаем техническое задание</h3>
+          <p>Изучаем требования проекта и параметры оборудования.</p>
+        </div>
+        <div class="step rv">
+          <span class="step-n">02</span>
+          <h3>Подбираем оборудование</h3>
+          <p>Выбираем решение среди продукции представляемых производителей.</p>
+        </div>
+        <div class="step rv">
+          <span class="step-n">03</span>
+          <h3>Согласовываем решение</h3>
+          <p>Сопровождаем техническое и коммерческое согласование с участниками проекта.</p>
+        </div>
+        <div class="step rv">
+          <span class="step-n">04</span>
+          <h3>Организуем поставку</h3>
+          <p>Контролируем комплектацию и поставку оборудования заказчику.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОТРАСЛИ: чипы -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>Отрасли</h2>
+      <p class="lede" style="margin-top:14px">Оборудование подбирается под требования конкретного производства и его рабочих сред.</p>
+      <div class="ind">
+        <span>Нефтепереработка</span>
+        <span>Нефтедобыча</span>
+        <span>Газовая промышленность</span>
+        <span>Химия и нефтехимия</span>
+        <span>Энергетика</span>
+        <span>Теплоснабжение</span>
+        <span>Водоподготовка</span>
+        <span>Металлургия</span>
+        <span>ЖКХ</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОЧЕМУ: список на линиях, 2 колонки -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <h2 style="margin-bottom:8px">Почему Русармкомплект</h2>
+      <div class="why">
+        <div class="rv"><b>Подбор под требования проекта</b><p>Отталкиваемся от параметров среды и условий эксплуатации, а не от складских остатков.</p></div>
+        <div class="rv"><b>Российские и китайские производители</b><p>Подбираем аналог, когда привычная позиция стала недоступной.</p></div>
+        <div class="rv"><b>Техническое сопровождение согласования</b><p>Отрабатываем замечания проектировщика и службы эксплуатации.</p></div>
+        <div class="rv"><b>Комплексная поставка</b><p>Арматура, приводы и комплектующие приходят одним поставщиком.</p></div>
+        <div class="rv"><b>Опыт работы с промышленными предприятиями</b><p>Понимаем порядок согласований и требования к документации.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + ФОРМА -->
+  <section class="sec cta" id="request">
+    <div class="wrap cta-grid">
+      <div>
+        <h2>Пришлите техническое задание</h2>
+        <p class="lede">Ответим с подбором и сроками поставки. Если готового ТЗ нет, заполните опросный лист по типу оборудования.</p>
+        <div class="hero-cta">
+          <a class="btn btn-onnavy" href="#">Опросный лист на арматуру</a>
+          <a class="btn btn-onnavy" href="#">Опросный лист на привод</a>
+        </div>
+      </div>
+      <form>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Имя</label>
+            <input id="f-name" type="text" placeholder="Как к вам обращаться">
+          </div>
+          <div class="field">
+            <label for="f-org">Организация</label>
+            <input id="f-org" type="text" placeholder="Название компании">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-tel">Телефон</label>
+            <input id="f-tel" type="tel" placeholder="+7 ___ ___-__-__">
+          </div>
+          <div class="field">
+            <label for="f-mail">Почта</label>
+            <input id="f-mail" type="email" placeholder="name@company.ru">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-task">Задача</label>
+          <textarea id="f-task" placeholder="Тип арматуры, DN, PN, среда, температура, тип привода"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Отправить запрос</button>
+        <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ДОКУМЕНТЫ -->
+  <section class="sec" id="docs">
+    <div class="wrap">
+      <h2>Документы и сертификаты</h2>
+      <p class="lede" style="margin-top:14px">Продукция сопровождается паспортами и сертификатами заводов-изготовителей.</p>
+      <div class="docs">
+        <a class="doc rv" href="#">
+          <svg class="doc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+          <b>Сертификаты соответствия</b><span>Документы на поставляемую продукцию</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg class="doc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+          <b>Паспорта изделий</b><span>Технические паспорта заводов</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg class="doc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v6c0 4-3.4 7.2-8 8-4.6-.8-8-4-8-8V7l8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <b>Разрешительная документация</b><span>Разрешения на применение</span>
+        </a>
+        <a class="doc rv" href="#">
+          <svg class="doc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M4 19h16"/></svg>
+          <b>Каталоги производителей</b><span>Технические характеристики, PDF</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВОСТИ -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <h2>Новости</h2>
+      <div class="news">
+        <article class="rv">
+          <time datetime="2026-09-04">04.09.2026</time>
+          <h3>Расширили линейку приводов ТРУТОРК РУС</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+        <article class="rv">
+          <time datetime="2026-08-19">19.08.2026</time>
+          <h3>Поставка запорной арматуры на объект теплоснабжения</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+        <article class="rv">
+          <time datetime="2026-07-30">30.07.2026</time>
+          <h3>Обновили опросные листы для подбора оборудования</h3>
+          <p>Пример карточки новости. Текст будет заменён на материал заказчика.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr" id="contacts">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <a class="logo" href="#">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="4" fill="#1C4E8F"/>
+            <path d="M16 7v18M9 11h14M11 22h10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3.6" fill="#F2761B"/>
+          </svg>
+          РУСАРМКОМПЛЕКТ
+        </a>
+        <p style="margin-top:16px;max-width:34ch">Комплексные поставки трубопроводной арматуры и приводного оборудования.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#about">О компании</a></li>
+          <li><a href="#products">Продукция</a></li>
+          <li><a href="#mfr">Производители</a></li>
+          <li><a href="#docs">Документы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Запрос</h4>
+        <ul>
+          <li><a href="#request">Отправить ТЗ</a></li>
+          <li><a href="#request">Опросный лист на арматуру</a></li>
+          <li><a href="#request">Опросный лист на привод</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74957830006">+7 (495) 783-00-06</a></li>
+          <li><a href="mailto:info@rusarmkomplekt.ru">info@rusarmkomplekt.ru</a></li>
+          <li>Москва, адрес уточняется</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr-btm">
+      <span>ООО «Русармкомплект»</span>
+      <span>Прототип для согласования, тексты не утверждены</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('rv-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var delay = (Array.prototype.indexOf.call(el.parentNode.children, el) % 4) * 60;
+      setTimeout(function(){ el.classList.add('rv-in'); }, delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.18 });
+  items.forEach(function(el){ io.observe(el); });
+  // страховка: если наблюдатель по какой-то причине не сработал, показываем всё
+  setTimeout(function(){
+    items.forEach(function(el){ el.classList.add('rv-in'); });
+  }, 2500);
+})();
+</script>
+</body>
+</html>
